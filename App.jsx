@@ -1,0 +1,413 @@
+import { useState, useMemo, useEffect } from "react";
+
+const CATEGORIES = [
+  { id: "alimentacion", label: "Alimentación", emoji: "🛒", color: "#F59E0B" },
+  { id: "transporte", label: "Transporte", emoji: "🚗", color: "#3B82F6" },
+  { id: "servicios", label: "Servicios", emoji: "💡", color: "#8B5CF6" },
+  { id: "entretenimiento", label: "Entretenimiento", emoji: "🎮", color: "#EC4899" },
+  { id: "salud", label: "Salud", emoji: "💊", color: "#10B981" },
+  { id: "ropa", label: "Ropa", emoji: "👕", color: "#F97316" },
+  { id: "coleccion", label: "Colección", emoji: "🎴", color: "#EF4444" },
+  { id: "otros", label: "Otros", emoji: "📦", color: "#6B7280" },
+];
+
+const MONTHS = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+const now = new Date();
+
+function formatCLP(n) {
+  return new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 }).format(n);
+}
+
+function getCuotaIndex(expense, month, year) {
+  return (year * 12 + month) - (expense.startYear * 12 + expense.startMonth);
+}
+
+function appliesToMonth(expense, month, year) {
+  const idx = getCuotaIndex(expense, month, year);
+  if (expense.recurrente) return idx >= 0;
+  if (expense.cuotas === 1) return idx === 0;
+  return idx >= 0 && idx < expense.cuotas;
+}
+
+export default function App() {
+  const [expenses, setExpenses] = useState(() => {
+    try {
+      const saved = localStorage.getItem("mis-gastos-v1");
+      return saved ? JSON.parse(saved) : [];
+    } catch { return []; }
+  });
+  const [month, setMonth] = useState(now.getMonth());
+  const [year, setYear] = useState(now.getFullYear());
+  const [form, setForm] = useState({ desc: "", amount: "", category: "servicios", cuotas: "1", recurrente: false });
+  const [showForm, setShowForm] = useState(false);
+  const [editId, setEditId] = useState(null);
+  const [filterCat, setFilterCat] = useState("all");
+  const [activeTab, setActiveTab] = useState("mes");
+
+  // Guardar en localStorage cada vez que cambien los gastos
+  useEffect(() => {
+    localStorage.setItem("mis-gastos-v1", JSON.stringify(expenses));
+  }, [expenses]);
+
+  const filtered = useMemo(() =>
+    expenses.filter(e => appliesToMonth(e, month, year) && (filterCat === "all" || e.category === filterCat))
+  , [expenses, month, year, filterCat]);
+
+  const monthTotal = useMemo(() =>
+    expenses.filter(e => appliesToMonth(e, month, year)).reduce((s, e) => s + e.amountPerCuota, 0)
+  , [expenses, month, year]);
+
+  const byCategory = useMemo(() => {
+    const map = {};
+    expenses.filter(e => appliesToMonth(e, month, year)).forEach(e => {
+      map[e.category] = (map[e.category] || 0) + e.amountPerCuota;
+    });
+    return map;
+  }, [expenses, month, year]);
+
+  const cuotasActivas = useMemo(() =>
+    expenses.filter(e => e.cuotas > 1 && !e.recurrente).sort((a, b) => {
+      return (a.startYear * 12 + a.startMonth + a.cuotas) - (b.startYear * 12 + b.startMonth + b.cuotas);
+    })
+  , [expenses]);
+
+  const recurrentes = useMemo(() =>
+    expenses.filter(e => e.recurrente).sort((a, b) => a.desc.localeCompare(b.desc))
+  , [expenses]);
+
+  function saveExpense() {
+    const amt = parseFloat(String(form.amount).replace(/\./g, "").replace(",", "."));
+    const cuotas = form.recurrente ? 1 : (parseInt(form.cuotas) || 1);
+    if (!form.desc.trim() || isNaN(amt) || amt <= 0) return;
+    const amountPerCuota = form.recurrente ? amt : Math.round(amt / cuotas);
+    const base = { desc: form.desc, totalAmount: amt, amountPerCuota, category: form.category, cuotas, recurrente: form.recurrente, startMonth: month, startYear: year, date: new Date().toLocaleDateString("es-CL") };
+    if (editId !== null) {
+      setExpenses(prev => prev.map(e => e.id === editId ? { ...e, ...base } : e));
+      setEditId(null);
+    } else {
+      setExpenses(prev => [...prev, { id: Date.now(), ...base }]);
+    }
+    setForm({ desc: "", amount: "", category: "servicios", cuotas: "1", recurrente: false });
+    setShowForm(false);
+  }
+
+  function startEdit(exp) {
+    setForm({ desc: exp.desc, amount: String(exp.totalAmount), category: exp.category, cuotas: String(exp.cuotas), recurrente: exp.recurrente });
+    setEditId(exp.id);
+    setShowForm(true);
+  }
+
+  function deleteExpense(id) { setExpenses(prev => prev.filter(e => e.id !== id)); }
+  function prevMonth() { if (month === 0) { setMonth(11); setYear(y => y - 1); } else setMonth(m => m - 1); }
+  function nextMonth() { if (month === 11) { setMonth(0); setYear(y => y + 1); } else setMonth(m => m + 1); }
+
+  const topCat = Object.entries(byCategory).sort((a, b) => b[1] - a[1])[0];
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#0F1117", fontFamily: "'DM Sans', sans-serif", color: "#F1F5F9", paddingBottom: 80 }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .cat-pill { cursor: pointer; padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 500; border: 1.5px solid transparent; transition: all .2s; white-space: nowrap; background: none; }
+        .expense-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 14px; background: #1A1D27; margin-bottom: 8px; transition: background .15s; }
+        .expense-row:hover { background: #1E2235; }
+        .icon-btn { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 8px; transition: background .15s; color: #64748B; display: flex; align-items: center; }
+        .icon-btn:hover { background: #2D3249; color: #F1F5F9; }
+        .add-btn { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #6366F1, #8B5CF6); border: none; cursor: pointer; color: white; font-size: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(99,102,241,.45); transition: transform .2s; z-index: 100; }
+        .add-btn:hover { transform: scale(1.08); }
+        .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); z-index: 200; display: flex; align-items: flex-end; justify-content: center; }
+        .modal { background: #161821; border-radius: 24px 24px 0 0; padding: 28px 24px 40px; width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto; }
+        .input { background: #1A1D27; border: 1.5px solid #2D3249; border-radius: 12px; padding: 12px 16px; color: #F1F5F9; font-size: 15px; width: 100%; font-family: inherit; outline: none; transition: border-color .2s; }
+        .input:focus { border-color: #6366F1; }
+        .primary-btn { background: linear-gradient(135deg, #6366F1, #8B5CF6); color: white; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; font-family: inherit; }
+        .cancel-btn { background: #1A1D27; color: #94A3B8; border: 1.5px solid #2D3249; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 500; cursor: pointer; width: 100%; font-family: inherit; }
+        .tab { flex: 1; padding: 10px; border: none; background: none; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 500; border-radius: 10px; transition: all .2s; }
+        .bar { height: 6px; border-radius: 999px; transition: width .5s ease; }
+        .month-nav { background: none; border: none; color: #94A3B8; cursor: pointer; padding: 8px; border-radius: 8px; font-size: 18px; transition: color .15s; }
+        .cuota-card { background: #1A1D27; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; border-left: 3px solid; }
+        .cuota-progress { height: 5px; background: #2D3249; border-radius: 999px; margin-top: 8px; overflow: hidden; }
+        .cuota-progress-bar { height: 100%; border-radius: 999px; transition: width .5s ease; }
+        .stepper { display: flex; align-items: center; background: #1A1D27; border: 1.5px solid #2D3249; border-radius: 12px; overflow: hidden; }
+        .stepper-btn { background: none; border: none; color: #94A3B8; cursor: pointer; padding: 10px 16px; font-size: 20px; font-family: inherit; transition: background .15s; flex-shrink: 0; }
+        .stepper-btn:hover { background: #2D3249; color: white; }
+        .stepper-val { flex: 1; text-align: center; font-size: 15px; color: #F1F5F9; font-weight: 600; font-family: 'DM Mono', monospace; }
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; background: #1A1D27; border: 1.5px solid #2D3249; border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: border-color .2s; }
+        .toggle-row.active { border-color: #10B981; background: #10B98111; }
+        .toggle-track { width: 44px; height: 24px; border-radius: 999px; background: #2D3249; transition: background .2s; position: relative; flex-shrink: 0; }
+        .toggle-track.on { background: #10B981; }
+        .toggle-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: white; transition: transform .2s; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+        .toggle-thumb.on { transform: translateX(20px); }
+        .recurrente-card { background: #1A1D27; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; border-left: 3px solid #10B981; }
+        .badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: .3px; }
+      `}</style>
+
+      {/* Header */}
+      <div style={{ background: "linear-gradient(160deg, #161821 0%, #1A1040 100%)", padding: "28px 20px 20px", borderBottom: "1px solid #1E2235" }}>
+        <div style={{ maxWidth: 480, margin: "0 auto" }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#6366F1", letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>💰 Mis Gastos</div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+            <button className="month-nav" onClick={prevMonth}>‹</button>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 22, fontWeight: 700 }}>{MONTHS[month]}</div>
+              <div style={{ fontSize: 13, color: "#64748B" }}>{year}</div>
+            </div>
+            <button className="month-nav" onClick={nextMonth}>›</button>
+          </div>
+          <div style={{ background: "rgba(99,102,241,.1)", border: "1px solid rgba(99,102,241,.25)", borderRadius: 18, padding: "18px 22px" }}>
+            <div style={{ fontSize: 12, color: "#94A3B8", marginBottom: 2 }}>Total del mes</div>
+            <div style={{ fontSize: 30, fontWeight: 700, fontFamily: "'DM Mono', monospace", letterSpacing: -1 }}>{formatCLP(monthTotal)}</div>
+            {topCat && (
+              <div style={{ marginTop: 6, fontSize: 12, color: "#64748B" }}>
+                Mayor: <span style={{ color: CATEGORIES.find(c => c.id === topCat[0])?.color }}>{CATEGORIES.find(c => c.id === topCat[0])?.emoji} {CATEGORIES.find(c => c.id === topCat[0])?.label}</span> — {formatCLP(topCat[1])}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 480, margin: "0 auto", padding: "16px 16px 0" }}>
+
+        {/* Tabs */}
+        <div style={{ display: "flex", background: "#161821", borderRadius: 12, padding: 4, marginBottom: 16, border: "1px solid #1E2235" }}>
+          <button className="tab" onClick={() => setActiveTab("mes")} style={{ color: activeTab === "mes" ? "#F1F5F9" : "#64748B", background: activeTab === "mes" ? "#2D3249" : "none" }}>📅 Este mes</button>
+          <button className="tab" onClick={() => setActiveTab("cuotas")} style={{ color: activeTab === "cuotas" ? "#F1F5F9" : "#64748B", background: activeTab === "cuotas" ? "#2D3249" : "none" }}>
+            💳 Cuotas {cuotasActivas.length > 0 && <span style={{ background: "#6366F1", color: "white", borderRadius: 999, padding: "1px 6px", fontSize: 10, marginLeft: 3 }}>{cuotasActivas.length}</span>}
+          </button>
+          <button className="tab" onClick={() => setActiveTab("recurrentes")} style={{ color: activeTab === "recurrentes" ? "#F1F5F9" : "#64748B", background: activeTab === "recurrentes" ? "#2D3249" : "none" }}>
+            🔁 Fijos {recurrentes.length > 0 && <span style={{ background: "#10B981", color: "white", borderRadius: 999, padding: "1px 6px", fontSize: 10, marginLeft: 3 }}>{recurrentes.length}</span>}
+          </button>
+        </div>
+
+        {activeTab === "mes" && (
+          <>
+            {monthTotal > 0 && (
+              <div style={{ background: "#161821", border: "1px solid #1E2235", borderRadius: 16, padding: 16, marginBottom: 16 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: "#64748B", letterSpacing: 1, textTransform: "uppercase", marginBottom: 12 }}>Por categoría</div>
+                {CATEGORIES.filter(c => byCategory[c.id]).sort((a, b) => (byCategory[b.id] || 0) - (byCategory[a.id] || 0)).map(cat => (
+                  <div key={cat.id} style={{ marginBottom: 10 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, marginBottom: 4 }}>
+                      <span>{cat.emoji} {cat.label}</span>
+                      <span style={{ fontFamily: "'DM Mono', monospace", color: cat.color, fontSize: 12 }}>{formatCLP(byCategory[cat.id])}</span>
+                    </div>
+                    <div style={{ background: "#1A1D27", borderRadius: 999, height: 6 }}>
+                      <div className="bar" style={{ width: `${(byCategory[cat.id] / monthTotal) * 100}%`, background: cat.color }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4, marginBottom: 14, scrollbarWidth: "none" }}>
+              <button className="cat-pill" onClick={() => setFilterCat("all")} style={{ background: filterCat === "all" ? "#6366F1" : "#1A1D27", color: filterCat === "all" ? "white" : "#94A3B8", border: `1.5px solid ${filterCat === "all" ? "#6366F1" : "#2D3249"}` }}>Todos</button>
+              {CATEGORIES.filter(c => byCategory[c.id]).map(cat => (
+                <button key={cat.id} className="cat-pill" onClick={() => setFilterCat(filterCat === cat.id ? "all" : cat.id)} style={{ background: filterCat === cat.id ? cat.color + "22" : "#1A1D27", color: filterCat === cat.id ? cat.color : "#94A3B8", border: `1.5px solid ${filterCat === cat.id ? cat.color : "#2D3249"}` }}>
+                  {cat.emoji} {cat.label}
+                </button>
+              ))}
+            </div>
+
+            {filtered.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "48px 0" }}>
+                <div style={{ fontSize: 40, marginBottom: 12 }}>📋</div>
+                <div style={{ fontSize: 15, fontWeight: 500, color: "#475569" }}>Sin gastos este mes</div>
+                <div style={{ fontSize: 13, color: "#334155", marginTop: 4 }}>Toca + para agregar uno</div>
+              </div>
+            ) : (
+              filtered.sort((a, b) => {
+                const order = e => e.recurrente ? 0 : e.cuotas > 1 ? 1 : 2;
+                return order(a) - order(b) || b.id - a.id;
+              }).map(exp => {
+                const cat = CATEGORIES.find(c => c.id === exp.category);
+                const cuotaIdx = getCuotaIndex(exp, month, year) + 1;
+                return (
+                  <div key={exp.id} className="expense-row" style={{ borderLeft: exp.recurrente ? "3px solid #10B981" : exp.cuotas > 1 ? "3px solid #6366F1" : "3px solid transparent" }}>
+                    <div style={{ width: 40, height: 40, borderRadius: 12, background: cat.color + "22", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, flexShrink: 0 }}>{cat.emoji}</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 14, fontWeight: 500, color: "#E2E8F0", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{exp.desc}</div>
+                      <div style={{ fontSize: 11, color: "#475569", marginTop: 3, display: "flex", alignItems: "center", gap: 6 }}>
+                        <span>{cat.label}</span>
+                        {exp.recurrente && <span className="badge" style={{ background: "#10B98122", color: "#10B981" }}>🔁 Fijo</span>}
+                        {!exp.recurrente && exp.cuotas > 1 && <span className="badge" style={{ background: "#6366F122", color: "#818CF8" }}>💳 {cuotaIdx}/{exp.cuotas}</span>}
+                      </div>
+                    </div>
+                    <div style={{ textAlign: "right", flexShrink: 0 }}>
+                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 14, fontWeight: 500, color: cat.color }}>{formatCLP(exp.amountPerCuota)}</div>
+                      {exp.cuotas > 1 && <div style={{ fontSize: 10, color: "#475569" }}>de {formatCLP(exp.totalAmount)}</div>}
+                    </div>
+                    <button className="icon-btn" onClick={() => startEdit(exp)}>✏️</button>
+                    <button className="icon-btn" onClick={() => deleteExpense(exp.id)}>🗑️</button>
+                  </div>
+                );
+              })
+            )}
+          </>
+        )}
+
+        {activeTab === "cuotas" && (
+          <>
+            {cuotasActivas.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "48px 0" }}>
+                <div style={{ fontSize: 40, marginBottom: 12 }}>💳</div>
+                <div style={{ fontSize: 15, fontWeight: 500, color: "#475569" }}>Sin gastos en cuotas</div>
+                <div style={{ fontSize: 13, color: "#334155", marginTop: 4 }}>Agrega un gasto con más de 1 cuota</div>
+              </div>
+            ) : cuotasActivas.map(exp => {
+              const cat = CATEGORIES.find(c => c.id === exp.category);
+              const currentIdx = getCuotaIndex(exp, month, year);
+              const pagadas = Math.min(Math.max(currentIdx + 1, 0), exp.cuotas);
+              const endMonth = (exp.startMonth + exp.cuotas - 1) % 12;
+              const endYear = exp.startYear + Math.floor((exp.startMonth + exp.cuotas - 1) / 12);
+              const isPast = currentIdx >= exp.cuotas;
+              return (
+                <div key={exp.id} className="cuota-card" style={{ borderLeftColor: cat.color, opacity: isPast ? 0.5 : 1 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                        <span style={{ fontSize: 18 }}>{cat.emoji}</span>
+                        <span style={{ fontSize: 14, fontWeight: 600, color: "#E2E8F0" }}>{exp.desc}</span>
+                        {isPast && <span className="badge" style={{ background: "#10B98122", color: "#10B981" }}>PAGADO</span>}
+                      </div>
+                      <div style={{ fontSize: 12, color: "#64748B" }}>{MONTHS[exp.startMonth]} {exp.startYear} → {MONTHS[endMonth]} {endYear}</div>
+                    </div>
+                    <div style={{ textAlign: "right" }}>
+                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 15, fontWeight: 700, color: cat.color }}>{formatCLP(exp.amountPerCuota)}<span style={{ fontSize: 11, color: "#64748B", fontWeight: 400 }}>/mes</span></div>
+                      <div style={{ fontSize: 11, color: "#64748B" }}>Total {formatCLP(exp.totalAmount)}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12, color: "#64748B", marginTop: 8, marginBottom: 4 }}>
+                    <span>{isPast ? "Completado" : `Cuota ${Math.min(currentIdx + 1, exp.cuotas)} de ${exp.cuotas}`}</span>
+                    <span style={{ color: cat.color, fontWeight: 600 }}>{Math.round((pagadas / exp.cuotas) * 100)}%</span>
+                  </div>
+                  <div className="cuota-progress">
+                    <div className="cuota-progress-bar" style={{ width: `${(pagadas / exp.cuotas) * 100}%`, background: cat.color }} />
+                  </div>
+                  <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+                    <button className="icon-btn" style={{ fontSize: 12, padding: "4px 10px", border: "1px solid #2D3249", borderRadius: 8 }} onClick={() => startEdit(exp)}>✏️ Editar</button>
+                    <button className="icon-btn" style={{ fontSize: 12, padding: "4px 10px", border: "1px solid #2D3249", borderRadius: 8 }} onClick={() => deleteExpense(exp.id)}>🗑️ Eliminar</button>
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        )}
+
+        {activeTab === "recurrentes" && (
+          <>
+            {recurrentes.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "48px 0" }}>
+                <div style={{ fontSize: 40, marginBottom: 12 }}>🔁</div>
+                <div style={{ fontSize: 15, fontWeight: 500, color: "#475569" }}>Sin gastos fijos</div>
+                <div style={{ fontSize: 13, color: "#334155", marginTop: 4 }}>Agrega arriendo, Netflix, etc.</div>
+              </div>
+            ) : (
+              <>
+                <div style={{ background: "#10B98111", border: "1px solid #10B98133", borderRadius: 14, padding: "12px 16px", marginBottom: 16, fontSize: 13, color: "#10B981" }}>
+                  <strong>Total fijos:</strong> {formatCLP(recurrentes.reduce((s, e) => s + e.amountPerCuota, 0))} / mes
+                </div>
+                {recurrentes.map(exp => {
+                  const cat = CATEGORIES.find(c => c.id === exp.category);
+                  return (
+                    <div key={exp.id} className="recurrente-card">
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                          <div style={{ width: 40, height: 40, borderRadius: 12, background: cat.color + "22", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>{cat.emoji}</div>
+                          <div>
+                            <div style={{ fontSize: 14, fontWeight: 600, color: "#E2E8F0" }}>{exp.desc}</div>
+                            <div style={{ fontSize: 11, color: "#64748B", marginTop: 2 }}>{cat.label} · desde {MONTHS[exp.startMonth]} {exp.startYear}</div>
+                          </div>
+                        </div>
+                        <div style={{ textAlign: "right" }}>
+                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 15, fontWeight: 700, color: "#10B981" }}>{formatCLP(exp.amountPerCuota)}</div>
+                          <div style={{ fontSize: 10, color: "#475569" }}>/ mes</div>
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+                        <button className="icon-btn" style={{ fontSize: 12, padding: "4px 10px", border: "1px solid #2D3249", borderRadius: 8 }} onClick={() => startEdit(exp)}>✏️ Editar</button>
+                        <button className="icon-btn" style={{ fontSize: 12, padding: "4px 10px", border: "1px solid #2D3249", borderRadius: 8 }} onClick={() => deleteExpense(exp.id)}>🗑️ Eliminar</button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </>
+        )}
+      </div>
+
+      <button className="add-btn" onClick={() => { setShowForm(true); setEditId(null); setForm({ desc: "", amount: "", category: "servicios", cuotas: "1", recurrente: false }); }}>+</button>
+
+      {showForm && (
+        <div className="modal-bg" onClick={e => { if (e.target === e.currentTarget) { setShowForm(false); setEditId(null); }}}>
+          <div className="modal">
+            <div style={{ fontSize: 17, fontWeight: 700, marginBottom: 20, color: "#F1F5F9" }}>{editId ? "Editar gasto" : "Nuevo gasto"}</div>
+
+            <div style={{ marginBottom: 18 }}>
+              <div className={`toggle-row${form.recurrente ? " active" : ""}`} onClick={() => setForm(f => ({ ...f, recurrente: !f.recurrente, cuotas: "1" }))}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: form.recurrente ? "#10B981" : "#E2E8F0" }}>🔁 Gasto fijo mensual</div>
+                  <div style={{ fontSize: 12, color: "#64748B", marginTop: 2 }}>Arriendo, Netflix, suscripciones…</div>
+                </div>
+                <div className={`toggle-track${form.recurrente ? " on" : ""}`}>
+                  <div className={`toggle-thumb${form.recurrente ? " on" : ""}`} />
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginBottom: 14 }}>
+              <label style={{ fontSize: 12, color: "#64748B", display: "block", marginBottom: 6, fontWeight: 500 }}>Descripción</label>
+              <input className="input" placeholder={form.recurrente ? "Ej: Arriendo, Spotify, Luz…" : "Ej: TV Samsung, Uber…"} value={form.desc} onChange={e => setForm(f => ({ ...f, desc: e.target.value }))} />
+            </div>
+
+            <div style={{ marginBottom: 14 }}>
+              <label style={{ fontSize: 12, color: "#64748B", display: "block", marginBottom: 6, fontWeight: 500 }}>
+                {form.recurrente ? "Monto mensual (CLP)" : "Monto total (CLP)"}
+                {!form.recurrente && parseInt(form.cuotas) > 1 && (
+                  <span style={{ color: "#6366F1", marginLeft: 8 }}>→ {formatCLP(Math.round(parseFloat(String(form.amount).replace(/\./g,"").replace(",",".") || 0) / parseInt(form.cuotas)))} / mes</span>
+                )}
+              </label>
+              <input className="input" placeholder="0" type="number" value={form.amount} onChange={e => setForm(f => ({ ...f, amount: e.target.value }))} />
+            </div>
+
+            {!form.recurrente && (
+              <div style={{ marginBottom: 14 }}>
+                <label style={{ fontSize: 12, color: "#64748B", display: "block", marginBottom: 6, fontWeight: 500 }}>
+                  Cuotas {parseInt(form.cuotas) === 1 ? "(pago único)" : `(${form.cuotas} meses)`}
+                </label>
+                <div className="stepper">
+                  <button className="stepper-btn" onClick={() => setForm(f => ({ ...f, cuotas: String(Math.max(1, parseInt(f.cuotas) - 1)) }))}>−</button>
+                  <span className="stepper-val">{form.cuotas === "1" ? "1× (único)" : `${form.cuotas}×`}</span>
+                  <button className="stepper-btn" onClick={() => setForm(f => ({ ...f, cuotas: String(Math.min(48, parseInt(f.cuotas) + 1)) }))}>+</button>
+                </div>
+                <div style={{ fontSize: 11, color: "#475569", marginTop: 6 }}>Inicia en <span style={{ color: "#94A3B8" }}>{MONTHS[month]} {year}</span></div>
+              </div>
+            )}
+
+            {form.recurrente && (
+              <div style={{ fontSize: 12, color: "#10B981", background: "#10B98111", borderRadius: 10, padding: "10px 14px", marginBottom: 14 }}>
+                ✅ Aparecerá en todos los meses desde <strong>{MONTHS[month]} {year}</strong> en adelante.
+              </div>
+            )}
+
+            <div style={{ marginBottom: 20 }}>
+              <label style={{ fontSize: 12, color: "#64748B", display: "block", marginBottom: 8, fontWeight: 500 }}>Categoría</label>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {CATEGORIES.map(cat => (
+                  <button key={cat.id} onClick={() => setForm(f => ({ ...f, category: cat.id }))} style={{ padding: "7px 12px", borderRadius: 10, border: `1.5px solid ${form.category === cat.id ? cat.color : "#2D3249"}`, background: form.category === cat.id ? cat.color + "22" : "#1A1D27", color: form.category === cat.id ? cat.color : "#94A3B8", fontSize: 13, cursor: "pointer", fontFamily: "inherit", fontWeight: form.category === cat.id ? 600 : 400 }}>
+                    {cat.emoji} {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: 10 }}>
+              <button className="cancel-btn" onClick={() => { setShowForm(false); setEditId(null); }}>Cancelar</button>
+              <button className="primary-btn" onClick={saveExpense}>{editId ? "Guardar" : "Agregar"}</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
