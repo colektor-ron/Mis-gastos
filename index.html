@@ -79,6 +79,9 @@ const Icon = {
   Upload: ()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>,
   Settings: ()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
   Home: ()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+  HandMoney: ()=><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v6m0 0l-2-2m2 2l2-2"/><rect x="2" y="9" width="20" height="13" rx="2"/><path d="M17 14H7"/><path d="M17 18H7"/></svg>,
+  User: ()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+  Check: ()=><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>,
 };
 
 const CATEGORIES = [
@@ -104,6 +107,10 @@ function appliesToMonth(e,month,year){
 
 function App(){
   const [expenses,setExpenses]=useState(()=>{try{const s=localStorage.getItem("mis-gastos-v1");return s?JSON.parse(s):[]}catch{return[]}});
+  const [loans,setLoans]=useState(()=>{try{const s=localStorage.getItem("mis-gastos-loans-v1");return s?JSON.parse(s):[]}catch{return[]}});
+  const [showLoanForm,setShowLoanForm]=useState(false);
+  const [loanForm,setLoanForm]=useState({persona:"",amount:"",cuotas:"1",modoCuota:false,nota:""});
+  const [editLoanId,setEditLoanId]=useState(null);
   const [month,setMonth]=useState(now.getMonth());
   const [year,setYear]=useState(now.getFullYear());
   const [form,setForm]=useState({desc:"",amount:"",category:"servicios",cuotas:"1",recurrente:false,modoCuota:false});
@@ -116,12 +123,13 @@ function App(){
   const fileRef=useRef();
 
   useEffect(()=>{localStorage.setItem("mis-gastos-v1",JSON.stringify(expenses));},[expenses]);
+  useEffect(()=>{localStorage.setItem("mis-gastos-loans-v1",JSON.stringify(loans));},[loans]);
 
   function showToast(msg,color="#10B981"){setToast({msg,color});setTimeout(()=>setToast(null),2500);}
 
   // ── BACKUP ──
   function exportData(){
-    const data=JSON.stringify({version:1,exportDate:new Date().toISOString(),expenses},null,2);
+    const data=JSON.stringify({version:1,exportDate:new Date().toISOString(),expenses,loans},null,2);
     const blob=new Blob([data],{type:"application/json"});
     const url=URL.createObjectURL(blob);
     const a=document.createElement("a");
@@ -140,6 +148,7 @@ function App(){
         const parsed=JSON.parse(ev.target.result);
         if(parsed.expenses&&Array.isArray(parsed.expenses)){
           setExpenses(parsed.expenses);
+          if(parsed.loans&&Array.isArray(parsed.loans))setLoans(parsed.loans);
           showToast("✅ Datos importados correctamente");
           setShowSettings(false);
         }else{showToast("⚠️ Archivo inválido","#EF4444");}
@@ -154,6 +163,23 @@ function App(){
   const byCategory=useMemo(()=>{const map={};expenses.filter(e=>appliesToMonth(e,month,year)).forEach(e=>{map[e.category]=(map[e.category]||0)+e.amountPerCuota;});return map;},[expenses,month,year]);
   const cuotasActivas=useMemo(()=>expenses.filter(e=>e.cuotas>1&&!e.recurrente).sort((a,b)=>(a.startYear*12+a.startMonth+a.cuotas)-(b.startYear*12+b.startMonth+b.cuotas)),[expenses]);
   const recurrentes=useMemo(()=>expenses.filter(e=>e.recurrente).sort((a,b)=>a.desc.localeCompare(b.desc)),[expenses]);
+
+  function saveLoan(){
+    const amt=parseFloat(String(loanForm.amount).replace(/\./g,"").replace(",","."));
+    const cuotas=parseInt(loanForm.cuotas)||1;
+    if(!loanForm.persona.trim()||isNaN(amt)||amt<=0)return;
+    const amountPerCuota=loanForm.modoCuota?amt:Math.round(amt/cuotas);
+    const totalAmount=loanForm.modoCuota?Math.round(amt*cuotas):amt;
+    const base={persona:loanForm.persona,totalAmount,amountPerCuota,cuotas,nota:loanForm.nota,date:new Date().toLocaleDateString("es-CL"),cuotasPagadas:0};
+    if(editLoanId!==null){setLoans(prev=>prev.map(l=>l.id===editLoanId?{...l,...base}:l));setEditLoanId(null);}
+    else setLoans(prev=>[...prev,{id:Date.now(),...base}]);
+    setLoanForm({persona:"",amount:"",cuotas:"1",modoCuota:false,nota:""});
+    setShowLoanForm(false);
+  }
+  function startEditLoan(loan){setLoanForm({persona:loan.persona,amount:String(loan.totalAmount),cuotas:String(loan.cuotas),modoCuota:false,nota:loan.nota||""});setEditLoanId(loan.id);setShowLoanForm(true);}
+  function deleteLoan(id){setLoans(prev=>prev.filter(l=>l.id!==id));}
+  function pagarCuota(id){setLoans(prev=>prev.map(l=>l.id===id?{...l,cuotasPagadas:Math.min(l.cuotasPagadas+1,l.cuotas)}:l));}
+  function unpayLoan(id){setLoans(prev=>prev.map(l=>l.id===id?{...l,cuotasPagadas:0}:l));}
 
   function saveExpense(){
     const amt=parseFloat(String(form.amount).replace(/\./g,"").replace(",","."));
@@ -207,6 +233,7 @@ function App(){
           <button className="tab" onClick={()=>setActiveTab("mes")} style={{color:activeTab==="mes"?"#F1F5F9":"#64748B",background:activeTab==="mes"?"#2D3249":"none"}}><Icon.Calendar/>Este mes</button>
           <button className="tab" onClick={()=>setActiveTab("cuotas")} style={{color:activeTab==="cuotas"?"#F1F5F9":"#64748B",background:activeTab==="cuotas"?"#2D3249":"none"}}><Icon.CreditCard/>Cuotas {cuotasActivas.length>0&&<span style={{background:"#6366F1",color:"white",borderRadius:999,padding:"1px 6px",fontSize:10}}>{cuotasActivas.length}</span>}</button>
           <button className="tab" onClick={()=>setActiveTab("recurrentes")} style={{color:activeTab==="recurrentes"?"#F1F5F9":"#64748B",background:activeTab==="recurrentes"?"#2D3249":"none"}}><Icon.Repeat/>Fijos {recurrentes.length>0&&<span style={{background:"#10B981",color:"white",borderRadius:999,padding:"1px 6px",fontSize:10}}>{recurrentes.length}</span>}</button>
+          <button className="tab" onClick={()=>setActiveTab("prestamos")} style={{color:activeTab==="prestamos"?"#F1F5F9":"#64748B",background:activeTab==="prestamos"?"#2D3249":"none"}}><Icon.HandMoney/>Préstamos {loans.length>0&&<span style={{background:"#F59E0B",color:"white",borderRadius:999,padding:"1px 6px",fontSize:10}}>{loans.filter(l=>l.cuotasPagadas<l.cuotas).length}</span>}</button>
         </div>
 
         {/* TAB: ESTE MES */}
@@ -320,8 +347,66 @@ function App(){
         </>}
       </div>
 
+      {/* TAB: PRÉSTAMOS */}
+        {activeTab==="prestamos"&&<>
+          {loans.length===0
+            ?<div style={{textAlign:"center",padding:"48px 0"}}><div style={{opacity:.3,marginBottom:12,display:"flex",justifyContent:"center"}}><Icon.User/></div><div style={{fontSize:15,fontWeight:500,color:"#475569"}}>Sin préstamos registrados</div><div style={{fontSize:13,color:"#334155",marginTop:4}}>Toca + para agregar uno</div></div>
+            :<>
+              {/* Resumen */}
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:16}}>
+                <div style={{background:"#1A1D27",borderRadius:14,padding:"14px 16px",borderLeft:"3px solid #F59E0B"}}>
+                  <div style={{fontSize:11,color:"#64748B",marginBottom:4}}>Total prestado</div>
+                  <div style={{fontFamily:"'DM Mono',monospace",fontSize:15,fontWeight:700,color:"#F59E0B"}}>{formatCLP(loans.reduce((s,l)=>s+l.totalAmount,0))}</div>
+                </div>
+                <div style={{background:"#1A1D27",borderRadius:14,padding:"14px 16px",borderLeft:"3px solid #EF4444"}}>
+                  <div style={{fontSize:11,color:"#64748B",marginBottom:4}}>Por cobrar</div>
+                  <div style={{fontFamily:"'DM Mono',monospace",fontSize:15,fontWeight:700,color:"#EF4444"}}>{formatCLP(loans.reduce((s,l)=>s+(l.amountPerCuota*(l.cuotas-l.cuotasPagadas)),0))}</div>
+                </div>
+              </div>
+              {loans.sort((a,b)=>(a.cuotasPagadas>=a.cuotas?1:-1)||(b.id-a.id)).map(loan=>{
+                const isPaid=loan.cuotasPagadas>=loan.cuotas;
+                const pending=loan.amountPerCuota*(loan.cuotas-loan.cuotasPagadas);
+                return(<div key={loan.id} style={{background:"#1A1D27",borderRadius:14,padding:"14px 16px",marginBottom:10,borderLeft:`3px solid ${isPaid?"#10B981":"#F59E0B"}`,opacity:isPaid?.65:1}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
+                    <div style={{flex:1}}>
+                      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4}}>
+                        <div style={{width:34,height:34,borderRadius:10,background:isPaid?"#10B98122":"#F59E0B22",display:"flex",alignItems:"center",justifyContent:"center",color:isPaid?"#10B981":"#F59E0B",flexShrink:0}}><Icon.User/></div>
+                        <div>
+                          <div style={{fontSize:14,fontWeight:600,color:"#E2E8F0"}}>{loan.persona}</div>
+                          <div style={{fontSize:11,color:"#64748B"}}>{loan.date}{loan.nota&&<span style={{marginLeft:6,color:"#475569"}}>· {loan.nota}</span>}</div>
+                        </div>
+                        {isPaid&&<span className="badge" style={{background:"#10B98122",color:"#10B981",marginLeft:4}}>PAGADO</span>}
+                      </div>
+                    </div>
+                    <div style={{textAlign:"right",flexShrink:0}}>
+                      <div style={{fontFamily:"'DM Mono',monospace",fontSize:15,fontWeight:700,color:isPaid?"#10B981":"#F59E0B"}}>{formatCLP(loan.totalAmount)}</div>
+                      {loan.cuotas>1&&<div style={{fontSize:11,color:"#64748B"}}>{formatCLP(loan.amountPerCuota)}/cuota</div>}
+                    </div>
+                  </div>
+                  {loan.cuotas>1&&<>
+                    <div style={{display:"flex",justifyContent:"space-between",fontSize:12,color:"#64748B",marginBottom:4}}>
+                      <span>{isPaid?"Completado":`Cuota ${loan.cuotasPagadas}/${loan.cuotas} · Falta ${formatCLP(pending)}`}</span>
+                      <span style={{color:isPaid?"#10B981":"#F59E0B",fontWeight:600}}>{Math.round((loan.cuotasPagadas/loan.cuotas)*100)}%</span>
+                    </div>
+                    <div style={{height:5,background:"#2D3249",borderRadius:999,marginBottom:10,overflow:"hidden"}}>
+                      <div style={{height:"100%",borderRadius:999,background:isPaid?"#10B981":"#F59E0B",width:`${(loan.cuotasPagadas/loan.cuotas)*100}%`,transition:"width .4s ease"}}/>
+                    </div>
+                  </>}
+                  <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+                    {!isPaid&&<button className="icon-btn" style={{fontSize:12,padding:"5px 12px",border:"1px solid #10B98144",borderRadius:8,gap:5,color:"#10B981"}} onClick={()=>pagarCuota(loan.id)}><Icon.Check/>{loan.cuotas>1?"Registrar cuota":"Marcar pagado"}</button>}
+                    {isPaid&&<button className="icon-btn" style={{fontSize:12,padding:"5px 12px",border:"1px solid #2D3249",borderRadius:8,gap:5}} onClick={()=>unpayLoan(loan.id)}>↩ Deshacer</button>}
+                    <button className="icon-btn" style={{fontSize:12,padding:"5px 12px",border:"1px solid #2D3249",borderRadius:8,gap:5}} onClick={()=>startEditLoan(loan)}><Icon.Edit/> Editar</button>
+                    <button className="icon-btn" style={{fontSize:12,padding:"5px 12px",border:"1px solid #2D3249",borderRadius:8,gap:5}} onClick={()=>deleteLoan(loan.id)}><Icon.Trash/> Eliminar</button>
+                  </div>
+                </div>);
+              })}
+            </>
+          }
+        </>}
+      </div>
+
       {/* FAB */}
-      <button className="add-btn" onClick={()=>{setShowForm(true);setEditId(null);setForm({desc:"",amount:"",category:"servicios",cuotas:"1",recurrente:false,modoCuota:false});}}><Icon.Plus/></button>
+      <button className="add-btn" onClick={()=>{if(activeTab==="prestamos"){setShowLoanForm(true);setEditLoanId(null);setLoanForm({persona:"",amount:"",cuotas:"1",modoCuota:false,nota:""});}else{setShowForm(true);setEditId(null);setForm({desc:"",amount:"",category:"servicios",cuotas:"1",recurrente:false,modoCuota:false});}}}><Icon.Plus/></button>
 
       {/* MODAL: SETTINGS */}
       {showSettings&&(
@@ -398,6 +483,48 @@ function App(){
             <div style={{display:"flex",gap:10}}>
               <button className="cancel-btn" onClick={()=>{setShowForm(false);setEditId(null);}}>Cancelar</button>
               <button className="primary-btn" onClick={saveExpense}>{editId?"Guardar":"Agregar"}</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+      {/* MODAL: PRÉSTAMO */}
+      {showLoanForm&&(
+        <div className="modal-bg" onClick={e=>{if(e.target===e.currentTarget){setShowLoanForm(false);setEditLoanId(null);}}}>
+          <div className="modal">
+            <div style={{fontSize:17,fontWeight:700,marginBottom:20,color:"#F1F5F9",display:"flex",alignItems:"center",gap:8}}><Icon.User/>{editLoanId?"Editar préstamo":"Nuevo préstamo"}</div>
+            <div style={{marginBottom:14}}>
+              <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>¿A quién le prestaste?</label>
+              <input className="input" placeholder="Nombre de la persona" value={loanForm.persona} onChange={e=>setLoanForm(f=>({...f,persona:e.target.value}))}/>
+            </div>
+            <div style={{marginBottom:14}}>
+              <div style={{display:"flex",background:"#1A1D27",borderRadius:10,padding:3,marginBottom:10,border:"1px solid #2D3249"}}>
+                <button onClick={()=>setLoanForm(f=>({...f,modoCuota:false,amount:""}))} style={{flex:1,padding:"7px",borderRadius:8,border:"none",cursor:"pointer",fontFamily:"inherit",fontSize:12,fontWeight:500,background:!loanForm.modoCuota?"#F59E0B":"none",color:!loanForm.modoCuota?"white":"#64748B",transition:"all .2s"}}>Monto total</button>
+                <button onClick={()=>setLoanForm(f=>({...f,modoCuota:true,amount:""}))} style={{flex:1,padding:"7px",borderRadius:8,border:"none",cursor:"pointer",fontFamily:"inherit",fontSize:12,fontWeight:500,background:loanForm.modoCuota?"#F59E0B":"none",color:loanForm.modoCuota?"white":"#64748B",transition:"all .2s"}}>Por cuota</button>
+              </div>
+              <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>
+                {loanForm.modoCuota?"Monto por cuota (CLP)":"Monto total (CLP)"}
+                {!loanForm.modoCuota&&parseInt(loanForm.cuotas)>1&&<span style={{color:"#F59E0B",marginLeft:8}}>→ {formatCLP(Math.round(parseFloat(String(loanForm.amount).replace(/\./g,"").replace(",",".")||0)/parseInt(loanForm.cuotas)))} / cuota</span>}
+                {loanForm.modoCuota&&parseInt(loanForm.cuotas)>1&&<span style={{color:"#F59E0B",marginLeft:8}}>Total: {formatCLP(Math.round(parseFloat(String(loanForm.amount).replace(/\./g,"").replace(",",".")||0)*parseInt(loanForm.cuotas)))}</span>}
+              </label>
+              <input className="input" placeholder="0" type="number" value={loanForm.amount} onChange={e=>setLoanForm(f=>({...f,amount:e.target.value}))}/>
+            </div>
+            <div style={{marginBottom:14}}>
+              <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Cuotas {parseInt(loanForm.cuotas)===1?"(pago único)":`(${loanForm.cuotas} pagos)`}</label>
+              <div className="stepper">
+                <button className="stepper-btn" onClick={()=>setLoanForm(f=>({...f,cuotas:String(Math.max(1,parseInt(f.cuotas)-1))}))}>−</button>
+                <span className="stepper-val">{loanForm.cuotas==="1"?"1× (único)":`${loanForm.cuotas}×`}</span>
+                <button className="stepper-btn" onClick={()=>setLoanForm(f=>({...f,cuotas:String(Math.min(48,parseInt(f.cuotas)+1))}))}>+</button>
+              </div>
+            </div>
+            <div style={{marginBottom:20}}>
+              <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Nota (opcional)</label>
+              <input className="input" placeholder="Ej: Para la micro, préstamo de emergencia…" value={loanForm.nota} onChange={e=>setLoanForm(f=>({...f,nota:e.target.value}))}/>
+            </div>
+            <div style={{display:"flex",gap:10}}>
+              <button className="cancel-btn" onClick={()=>{setShowLoanForm(false);setEditLoanId(null);}}>Cancelar</button>
+              <button style={{background:"linear-gradient(135deg,#F59E0B,#F97316)",color:"white",border:"none",borderRadius:12,padding:14,fontSize:15,fontWeight:600,cursor:"pointer",width:"100%",fontFamily:"inherit"}} onClick={saveLoan}>{editLoanId?"Guardar":"Agregar"}</button>
             </div>
           </div>
         </div>
