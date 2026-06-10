@@ -20,42 +20,43 @@
     ::-webkit-scrollbar{width:4px}
     ::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
     .cat-pill{cursor:pointer;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:500;border:1.5px solid transparent;transition:all .2s;white-space:nowrap;background:none;display:flex;align-items:center;gap:4px}
-    .expense-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;background:#1A1D27;margin-bottom:8px;transition:background .15s}
-    .expense-row:hover{background:#1E2235}
-    .icon-btn{background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;transition:background .15s;color:#64748B;display:flex;align-items:center}
-    .icon-btn:hover{background:#2D3249;color:#F1F5F9}
-    .add-btn{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#8B5CF6);border:none;cursor:pointer;color:white;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(99,102,241,.45);transition:transform .2s;z-index:100}
-    .add-btn:hover{transform:scale(1.08)}
-    .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:flex-end;justify-content:center}
+    .exp-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;background:#1A1D27;margin-bottom:8px;transition:background .15s}
+    .exp-row:hover{background:#1E2235}
+    .ibtn{background:none;border:none;cursor:pointer;padding:6px;border-radius:8px;transition:background .15s;color:#64748B;display:flex;align-items:center}
+    .ibtn:hover{background:#2D3249;color:#F1F5F9}
+    .fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#8B5CF6);border:none;cursor:pointer;color:white;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(99,102,241,.45);transition:transform .2s;z-index:100}
+    .fab:hover{transform:scale(1.08)}
+    .mbg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:flex-end;justify-content:center}
     .modal{background:#161821;border-radius:24px 24px 0 0;padding:28px 24px 40px;width:100%;max-width:480px;max-height:92vh;overflow-y:auto}
-    .input{background:#1A1D27;border:1.5px solid #2D3249;border-radius:12px;padding:12px 16px;color:#F1F5F9;font-size:15px;width:100%;font-family:inherit;outline:none;transition:border-color .2s}
-    .input:focus{border-color:#6366F1}
-    .primary-btn{background:linear-gradient(135deg,#6366F1,#8B5CF6);color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;width:100%;font-family:inherit}
-    .loan-btn{background:linear-gradient(135deg,#F59E0B,#F97316);color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;width:100%;font-family:inherit}
-    .cancel-btn{background:#1A1D27;color:#94A3B8;border:1.5px solid #2D3249;border-radius:12px;padding:14px;font-size:15px;font-weight:500;cursor:pointer;width:100%;font-family:inherit}
-    .tab{flex:1;padding:8px 4px;border:none;background:none;cursor:pointer;font-family:inherit;font-size:11px;font-weight:500;border-radius:10px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
+    .inp{background:#1A1D27;border:1.5px solid #2D3249;border-radius:12px;padding:12px 16px;color:#F1F5F9;font-size:15px;width:100%;font-family:inherit;outline:none;transition:border-color .2s}
+    .inp:focus{border-color:#6366F1}
+    .pbtn{background:linear-gradient(135deg,#6366F1,#8B5CF6);color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;width:100%;font-family:inherit}
+    .lbtn{background:linear-gradient(135deg,#F59E0B,#F97316);color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;width:100%;font-family:inherit}
+    .sbtn{background:linear-gradient(135deg,#10B981,#059669);color:white;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;width:100%;font-family:inherit}
+    .cbtn{background:#1A1D27;color:#94A3B8;border:1.5px solid #2D3249;border-radius:12px;padding:14px;font-size:15px;font-weight:500;cursor:pointer;width:100%;font-family:inherit}
+    .tab{flex:1;padding:8px 3px;border:none;background:none;cursor:pointer;font-family:inherit;font-size:10.5px;font-weight:500;border-radius:10px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:3px}
     .bar{height:6px;border-radius:999px;transition:width .5s ease}
-    .month-nav{background:none;border:none;color:#94A3B8;cursor:pointer;padding:8px;border-radius:8px;font-size:18px;transition:color .15s}
-    .cuota-card{background:#1A1D27;border-radius:14px;padding:14px 16px;margin-bottom:10px;border-left:3px solid}
+    .mnav{background:none;border:none;color:#94A3B8;cursor:pointer;padding:8px;border-radius:8px;font-size:18px;transition:color .15s}
+    .cc{background:#1A1D27;border-radius:14px;padding:14px 16px;margin-bottom:10px;border-left:3px solid}
     .cprog{height:5px;background:#2D3249;border-radius:999px;margin-top:8px;overflow:hidden}
-    .cprog-bar{height:100%;border-radius:999px;transition:width .5s ease}
-    .stepper{display:flex;align-items:center;background:#1A1D27;border:1.5px solid #2D3249;border-radius:12px;overflow:hidden}
-    .stepper-btn{background:none;border:none;color:#94A3B8;cursor:pointer;padding:10px 16px;font-size:20px;font-family:inherit;transition:background .15s;flex-shrink:0}
-    .stepper-btn:hover{background:#2D3249;color:white}
-    .stepper-val{flex:1;text-align:center;font-size:15px;color:#F1F5F9;font-weight:600;font-family:'DM Mono',monospace}
-    .toggle-row{display:flex;align-items:center;justify-content:space-between;background:#1A1D27;border:1.5px solid #2D3249;border-radius:14px;padding:14px 16px;cursor:pointer;transition:border-color .2s}
-    .toggle-row.active{border-color:#10B981;background:#10B98111}
+    .cpbar{height:100%;border-radius:999px;transition:width .5s ease}
+    .trow{display:flex;align-items:center;justify-content:space-between;background:#1A1D27;border:1.5px solid #2D3249;border-radius:14px;padding:14px 16px;cursor:pointer;transition:border-color .2s}
+    .trow.on{border-color:#10B981;background:#10B98111}
     .ttrack{width:44px;height:24px;border-radius:999px;background:#2D3249;transition:background .2s;position:relative;flex-shrink:0}
     .ttrack.on{background:#10B981}
     .tthumb{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:white;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
     .tthumb.on{transform:translateX(20px)}
-    .rec-card{background:#1A1D27;border-radius:14px;padding:14px 16px;margin-bottom:10px;border-left:3px solid #10B981}
-    .loan-card{background:#1A1D27;border-radius:14px;padding:14px 16px;margin-bottom:10px;border-left:3px solid}
     .badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700}
     .bkbtn{display:flex;align-items:center;gap:10px;background:#1A1D27;border:1.5px solid #2D3249;border-radius:12px;padding:12px 16px;cursor:pointer;color:#94A3B8;font-family:inherit;font-size:13px;font-weight:500;width:100%;transition:border-color .2s;margin-bottom:10px}
     .bkbtn:hover{border-color:#6366F1;color:#F1F5F9}
-    .mode-toggle{display:flex;background:#1A1D27;border-radius:10px;padding:3px;border:1px solid #2D3249;margin-bottom:10px}
-    .mode-btn{flex:1;padding:7px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:500;transition:all .2s}
+    .mtoggle{display:flex;background:#1A1D27;border-radius:10px;padding:3px;border:1px solid #2D3249;margin-bottom:10px}
+    .mbtn{flex:1;padding:7px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:500;transition:all .2s}
+    .stepper{display:flex;align-items:center;background:#1A1D27;border:1.5px solid #2D3249;border-radius:12px;overflow:hidden}
+    .sbtn2{background:none;border:none;color:#94A3B8;cursor:pointer;padding:10px 14px;font-size:20px;font-family:inherit;flex-shrink:0}
+    .sbtn2:hover{background:#2D3249;color:white}
+    .sinp{flex:1;background:none;border:none;color:#F1F5F9;font-size:16px;font-weight:600;text-align:center;font-family:'DM Mono',monospace;outline:none;padding:10px 0;width:100%}
+    .color-swatch{width:28px;height:28px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all .15s;flex-shrink:0}
+    .color-swatch.sel{border-color:white;transform:scale(1.1)}
   </style>
 </head>
 <body>
@@ -64,18 +65,20 @@
 const {useState,useMemo,useEffect,useRef}=React;
 
 const IC={
-  Cart:()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>,
-  Car:()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14l4 4v4a2 2 0 0 1-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 9h14"/></svg>,
-  Bolt:()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
-  Game:()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13" strokeWidth="2.5"/><line x1="18" y1="11" x2="18.01" y2="11" strokeWidth="2.5"/><path d="M6 4h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M10 20h4"/><path d="M12 16v4"/></svg>,
-  Heart:()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,
-  Shirt:()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>,
-  Star:()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
-  Box:()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>,
-  Cal:()=><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
-  CC:()=><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>,
-  Rep:()=><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>,
-  Hand:()=><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v6m0 0l-2-2m2 2l2-2"/><rect x="2" y="9" width="20" height="13" rx="2"/><path d="M17 14H7"/><path d="M17 18H7"/></svg>,
+  Cart:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>,
+  Car:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14l4 4v4a2 2 0 0 1-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 9h14"/></svg>,
+  Bolt:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+  Game:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13" strokeWidth="2.5"/><line x1="18" y1="11" x2="18.01" y2="11" strokeWidth="2.5"/><path d="M6 4h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M10 20h4"/><path d="M12 16v4"/></svg>,
+  Heart:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,
+  Shirt:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>,
+  Star:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+  Box:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>,
+  Paw:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg>,
+  Cal:()=><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+  CC:()=><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>,
+  Rep:()=><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>,
+  Hand:()=><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v6m0 0l-2-2m2 2l2-2"/><rect x="2" y="9" width="20" height="13" rx="2"/><path d="M17 14H7"/><path d="M17 18H7"/></svg>,
+  Pig:()=><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 5c-1.5 0-2.8.4-3.9 1L13 5H9L6.9 6C5.8 6.4 5 7.4 5 8.5V11a7 7 0 0 0 14 0V8c0-1.7-1.3-3-3-3z"/><path d="M9 11v.01"/><path d="M15 11v.01"/><path d="M5 11H4a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h1"/><path d="M19 11h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1"/><path d="M9 18v2"/><path d="M15 18v2"/></svg>,
   Edit:()=><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
   Trash:()=><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>,
   Plus:()=><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>,
@@ -83,45 +86,68 @@ const IC={
   Up:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>,
   Gear:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
   Check:()=><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>,
-  User:()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+  User:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+  Tag:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7" strokeWidth="3"/></svg>,
+  TrendUp:()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
 };
 
-const CATS=[
-  {id:"alimentacion",label:"Alimentación",I:IC.Cart, c:"#F59E0B"},
-  {id:"transporte",  label:"Transporte",  I:IC.Car,  c:"#3B82F6"},
-  {id:"servicios",   label:"Servicios",   I:IC.Bolt, c:"#8B5CF6"},
-  {id:"entretenimiento",label:"Entretenim.",I:IC.Game,c:"#EC4899"},
-  {id:"salud",       label:"Salud",       I:IC.Heart,c:"#10B981"},
-  {id:"ropa",        label:"Ropa",        I:IC.Shirt,c:"#F97316"},
-  {id:"coleccion",   label:"Colección",   I:IC.Star, c:"#EF4444"},
-  {id:"otros",       label:"Otros",       I:IC.Box,  c:"#6B7280"},
+const DEFAULT_CATS = [
+  {id:"alimentacion",label:"Alimentación",icon:"Cart", c:"#F59E0B",custom:false},
+  {id:"transporte",  label:"Transporte",  icon:"Car",  c:"#3B82F6",custom:false},
+  {id:"servicios",   label:"Servicios",   icon:"Bolt", c:"#8B5CF6",custom:false},
+  {id:"entretenimiento",label:"Entretenim.",icon:"Game",c:"#EC4899",custom:false},
+  {id:"salud",       label:"Salud",       icon:"Heart",c:"#10B981",custom:false},
+  {id:"ropa",        label:"Ropa",        icon:"Shirt",c:"#F97316",custom:false},
+  {id:"coleccion",   label:"Colección",   icon:"Star", c:"#EF4444",custom:false},
+  {id:"mascotas",    label:"Mascotas",    icon:"Paw",  c:"#06B6D4",custom:false},
+  {id:"otros",       label:"Otros",       icon:"Box",  c:"#6B7280",custom:false},
 ];
+
+const CAT_COLORS=["#F59E0B","#F97316","#EF4444","#EC4899","#8B5CF6","#6366F1","#3B82F6","#06B6D4","#10B981","#84CC16","#6B7280","#78716C"];
+const CAT_ICONS=["Tag","Star","Heart","Bolt","Car","Cart","Shirt","Box","Paw","Game","TrendUp","User"];
+
 const MES=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const now=new Date();
 const clp=n=>new Intl.NumberFormat("es-CL",{style:"currency",currency:"CLP",maximumFractionDigits:0}).format(n);
 const cidx=(e,m,y)=>(y*12+m)-(e.startYear*12+e.startMonth);
 const applies=(e,m,y)=>{const i=cidx(e,m,y);if(e.recurrente)return i>=0;if(e.cuotas===1)return i===0;return i>=0&&i<e.cuotas;};
 const load=k=>{try{const s=localStorage.getItem(k);return s?JSON.parse(s):[]}catch{return[]}};
+const loadObj=k=>{try{const s=localStorage.getItem(k);return s?JSON.parse(s):null}catch{return null}};
+
+function CatIcon({icon,size=15}){
+  const C=IC[icon]||IC.Tag;
+  return <C/>;
+}
 
 function App(){
   const [tab,setTab]=useState("mes");
   const [month,setMonth]=useState(now.getMonth());
   const [year,setYear]=useState(now.getFullYear());
+  const [cats,setCats]=useState(()=>loadObj("mg-cats")||DEFAULT_CATS);
   const [expenses,setExpenses]=useState(()=>load("mg-exp"));
   const [loans,setLoans]=useState(()=>load("mg-loans"));
+  const [savings,setSavings]=useState(()=>load("mg-savings"));
   const [filterCat,setFilterCat]=useState("all");
   const [showExp,setShowExp]=useState(false);
   const [showLoan,setShowLoan]=useState(false);
+  const [showSaving,setShowSaving]=useState(false);
   const [showCfg,setShowCfg]=useState(false);
+  const [showCatMgr,setShowCatMgr]=useState(false);
+  const [showNewCat,setShowNewCat]=useState(false);
   const [editExpId,setEditExpId]=useState(null);
   const [editLoanId,setEditLoanId]=useState(null);
+  const [editSavingId,setEditSavingId]=useState(null);
   const [toast,setToast]=useState(null);
   const fileRef=useRef();
-  const [ef,setEf]=useState({desc:"",amount:"",cat:"servicios",cuotas:"1",rec:false,byCuota:false});
+  const [ef,setEf]=useState({desc:"",amount:"",cat:"alimentacion",cuotas:"1",rec:false,byCuota:false});
   const [lf,setLf]=useState({persona:"",amount:"",cuotas:"1",byCuota:false,nota:""});
+  const [sf,setSf]=useState({nombre:"",meta:"",aportado:"",nota:""});
+  const [ncf,setNcf]=useState({label:"",icon:"Tag",c:"#6366F1"});
 
+  useEffect(()=>{localStorage.setItem("mg-cats",JSON.stringify(cats));},[cats]);
   useEffect(()=>{localStorage.setItem("mg-exp",JSON.stringify(expenses));},[expenses]);
   useEffect(()=>{localStorage.setItem("mg-loans",JSON.stringify(loans));},[loans]);
+  useEffect(()=>{localStorage.setItem("mg-savings",JSON.stringify(savings));},[savings]);
 
   const showMsg=(msg,color="#10B981")=>{setToast({msg,color});setTimeout(()=>setToast(null),2500);};
 
@@ -130,61 +156,106 @@ function App(){
   const byCat=useMemo(()=>{const m={};expenses.filter(e=>applies(e,month,year)).forEach(e=>{m[e.cat]=(m[e.cat]||0)+e.apc;});return m;},[expenses,month,year]);
   const cuotasExp=useMemo(()=>expenses.filter(e=>e.cuotas>1&&!e.recurrente),[expenses]);
   const recs=useMemo(()=>expenses.filter(e=>e.recurrente),[expenses]);
-  const topCat=Object.entries(byCat).sort((a,b)=>b[1]-a[1])[0];
   const pendingLoans=loans.filter(l=>l.cuotasPagadas<l.cuotas).length;
+  const topCat=Object.entries(byCat).sort((a,b)=>b[1]-a[1])[0];
+  const totalAhorros=savings.reduce((s,a)=>s+a.aportado,0);
+
+  const amt=v=>parseFloat(String(v).replace(/\./g,"").replace(",",".")||"0")||0;
 
   function saveExp(){
-    const amt=parseFloat(String(ef.amount).replace(/\./g,"").replace(",","."));
-    const cuotas=ef.rec?1:(parseInt(ef.cuotas)||1);
-    if(!ef.desc.trim()||isNaN(amt)||amt<=0)return;
+    const a=amt(ef.amount);const cuotas=Math.max(1,parseInt(ef.cuotas)||1);
+    if(!ef.desc.trim()||a<=0)return;
     let apc,total;
-    if(ef.rec){apc=amt;total=amt;}
-    else if(ef.byCuota){apc=amt;total=Math.round(amt*cuotas);}
-    else{total=amt;apc=Math.round(amt/cuotas);}
+    if(ef.rec){apc=a;total=a;}
+    else if(ef.byCuota){apc=a;total=Math.round(a*cuotas);}
+    else{total=a;apc=Math.round(a/cuotas);}
     const base={desc:ef.desc,total,apc,cat:ef.cat,cuotas,recurrente:ef.rec,startMonth:month,startYear:year,date:new Date().toLocaleDateString("es-CL")};
     if(editExpId!==null){setExpenses(p=>p.map(e=>e.id===editExpId?{...e,...base}:e));setEditExpId(null);}
     else setExpenses(p=>[...p,{id:Date.now(),...base}]);
-    setEf({desc:"",amount:"",cat:"servicios",cuotas:"1",rec:false,byCuota:false});
+    setEf({desc:"",amount:"",cat:"alimentacion",cuotas:"1",rec:false,byCuota:false});
     setShowExp(false);
   }
   function editExp(exp){setEf({desc:exp.desc,amount:String(exp.total),cat:exp.cat,cuotas:String(exp.cuotas),rec:exp.recurrente,byCuota:false});setEditExpId(exp.id);setShowExp(true);}
   function delExp(id){setExpenses(p=>p.filter(e=>e.id!==id));}
 
   function saveLoan(){
-    const amt=parseFloat(String(lf.amount).replace(/\./g,"").replace(",","."));
-    const cuotas=parseInt(lf.cuotas)||1;
-    if(!lf.persona.trim()||isNaN(amt)||amt<=0)return;
-    const apc=lf.byCuota?amt:Math.round(amt/cuotas);
-    const total=lf.byCuota?Math.round(amt*cuotas):amt;
+    const a=amt(lf.amount);const cuotas=Math.max(1,parseInt(lf.cuotas)||1);
+    if(!lf.persona.trim()||a<=0)return;
+    const apc=lf.byCuota?a:Math.round(a/cuotas);
+    const total=lf.byCuota?Math.round(a*cuotas):a;
     const base={persona:lf.persona,total,apc,cuotas,nota:lf.nota,date:new Date().toLocaleDateString("es-CL"),cuotasPagadas:0};
     if(editLoanId!==null){setLoans(p=>p.map(l=>l.id===editLoanId?{...l,...base}:l));setEditLoanId(null);}
     else setLoans(p=>[...p,{id:Date.now(),...base}]);
     setLf({persona:"",amount:"",cuotas:"1",byCuota:false,nota:""});
     setShowLoan(false);
   }
-  function editLoan(loan){setLf({persona:loan.persona,amount:String(loan.total),cuotas:String(loan.cuotas),byCuota:false,nota:loan.nota||""});setEditLoanId(loan.id);setShowLoan(true);}
+  function editLoan(l){setLf({persona:l.persona,amount:String(l.total),cuotas:String(l.cuotas),byCuota:false,nota:l.nota||""});setEditLoanId(l.id);setShowLoan(true);}
   function delLoan(id){setLoans(p=>p.filter(l=>l.id!==id));}
   function pagarCuota(id){setLoans(p=>p.map(l=>l.id===id?{...l,cuotasPagadas:Math.min(l.cuotasPagadas+1,l.cuotas)}:l));}
   function deshacerPago(id){setLoans(p=>p.map(l=>l.id===id?{...l,cuotasPagadas:Math.max(l.cuotasPagadas-1,0)}:l));}
 
+  function saveSaving(){
+    const aportado=amt(sf.aportado);const meta=amt(sf.meta);
+    if(!sf.nombre.trim()||aportado<0)return;
+    const base={nombre:sf.nombre,meta,aportado,nota:sf.nota,date:new Date().toLocaleDateString("es-CL")};
+    if(editSavingId!==null){setSavings(p=>p.map(s=>s.id===editSavingId?{...s,...base}:s));setEditSavingId(null);}
+    else setSavings(p=>[...p,{id:Date.now(),...base}]);
+    setSf({nombre:"",meta:"",aportado:"",nota:""});
+    setShowSaving(false);
+  }
+  function editSaving(s){setSf({nombre:s.nombre,meta:String(s.meta),aportado:String(s.aportado),nota:s.nota||""});setEditSavingId(s.id);setShowSaving(true);}
+  function delSaving(id){setSavings(p=>p.filter(s=>s.id!==id));}
+  function aportar(id,extra){setSavings(p=>p.map(s=>s.id===id?{...s,aportado:s.aportado+extra}:s));}
+
+  function saveNewCat(){
+    if(!ncf.label.trim())return;
+    const id="cat_"+Date.now();
+    setCats(p=>[...p.slice(0,-1),{id,label:ncf.label,icon:ncf.icon,c:ncf.c,custom:true},p[p.length-1]]);
+    setNcf({label:"",icon:"Tag",c:"#6366F1"});
+    setShowNewCat(false);
+  }
+  function delCat(id){
+    setCats(p=>p.filter(c=>c.id!==id));
+    setExpenses(p=>p.map(e=>e.cat===id?{...e,cat:"otros"}:e));
+  }
+
   function exportar(){
-    const blob=new Blob([JSON.stringify({v:1,date:new Date().toISOString(),expenses,loans},null,2)],{type:"application/json"});
+    const blob=new Blob([JSON.stringify({v:2,date:new Date().toISOString(),expenses,loans,savings,cats},null,2)],{type:"application/json"});
     const url=URL.createObjectURL(blob);
     const a=document.createElement("a");
     a.href=url;a.download=`mis-gastos-${new Date().toLocaleDateString("es-CL").replace(/\//g,"-")}.json`;a.click();
-    URL.revokeObjectURL(url);showMsg("✅ Respaldo exportado");
+    URL.revokeObjectURL(url);showMsg("Respaldo exportado");
   }
   function importar(e){
     const f=e.target.files[0];if(!f)return;
     const r=new FileReader();
-    r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.expenses){setExpenses(d.expenses);if(d.loans)setLoans(d.loans);showMsg("✅ Datos restaurados");setShowCfg(false);}else showMsg("⚠️ Archivo inválido","#EF4444");}catch{showMsg("⚠️ Error al leer","#EF4444");}};
+    r.onload=ev=>{try{const d=JSON.parse(ev.target.result);
+      if(d.expenses){setExpenses(d.expenses);if(d.loans)setLoans(d.loans);if(d.savings)setSavings(d.savings);if(d.cats)setCats(d.cats);showMsg("Datos restaurados");setShowCfg(false);}
+      else showMsg("Archivo inválido","#EF4444");
+    }catch{showMsg("Error al leer","#EF4444");}};
     r.readAsText(f);e.target.value="";
   }
 
   function prevMonth(){if(month===0){setMonth(11);setYear(y=>y-1);}else setMonth(m=>m-1);}
   function nextMonth(){if(month===11){setMonth(0);setYear(y=>y+1);}else setMonth(m=>m+1);}
 
-  const amt=v=>parseFloat(String(v).replace(/\./g,"").replace(",",".")||0);
+  const CuotasInput=({value,onChange})=>(
+    <div className="stepper">
+      <button className="sbtn2" onClick={()=>onChange(String(Math.max(1,parseInt(value||1)-1)))}>−</button>
+      <input className="sinp" type="number" min="1" max="48" value={value} onChange={e=>onChange(e.target.value)} onBlur={e=>{const v=Math.min(48,Math.max(1,parseInt(e.target.value)||1));onChange(String(v));}}/>
+      <button className="sbtn2" onClick={()=>onChange(String(Math.min(48,parseInt(value||1)+1)))}>+</button>
+    </div>
+  );
+
+  const EmptyState=({icon,text,sub})=>(
+    <div style={{textAlign:"center",padding:"48px 0"}}>
+      <div style={{width:56,height:56,borderRadius:16,background:"#1E2235",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 14px",color:"#334155"}}>
+        {React.createElement(IC[icon]||IC.Box,{size:28})}
+      </div>
+      <div style={{fontSize:15,fontWeight:500,color:"#475569"}}>{text}</div>
+      {sub&&<div style={{fontSize:13,color:"#334155",marginTop:4}}>{sub}</div>}
+    </div>
+  );
 
   return <div style={{minHeight:"100vh",background:"#0F1117",paddingBottom:88}}>
 
@@ -194,18 +265,23 @@ function App(){
     <div style={{background:"linear-gradient(160deg,#161821 0%,#1A1040 100%)",padding:"28px 20px 20px",borderBottom:"1px solid #1E2235"}}>
       <div style={{maxWidth:480,margin:"0 auto"}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
-          <div style={{fontSize:11,fontWeight:600,color:"#6366F1",letterSpacing:2,textTransform:"uppercase"}}>💰 Mis Gastos</div>
-          <button className="icon-btn" style={{color:"#64748B"}} onClick={()=>setShowCfg(true)}><IC.Gear/></button>
+          <div style={{display:"flex",alignItems:"center",gap:6,fontSize:11,fontWeight:600,color:"#6366F1",letterSpacing:2,textTransform:"uppercase"}}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6366F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/><line x1="8" y1="15" x2="8.01" y2="15" strokeWidth="3"/><line x1="12" y1="15" x2="16" y2="15"/></svg>
+            Mis Gastos
+          </div>
+          <button className="ibtn" style={{color:"#64748B"}} onClick={()=>setShowCfg(true)}><IC.Gear/></button>
         </div>
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16}}>
-          <button className="month-nav" onClick={prevMonth}>‹</button>
+          <button className="mnav" onClick={prevMonth}>‹</button>
           <div style={{textAlign:"center"}}><div style={{fontSize:22,fontWeight:700}}>{MES[month]}</div><div style={{fontSize:13,color:"#64748B"}}>{year}</div></div>
-          <button className="month-nav" onClick={nextMonth}>›</button>
+          <button className="mnav" onClick={nextMonth}>›</button>
         </div>
         <div style={{background:"rgba(99,102,241,.1)",border:"1px solid rgba(99,102,241,.25)",borderRadius:18,padding:"18px 22px"}}>
           <div style={{fontSize:12,color:"#94A3B8",marginBottom:2}}>Total del mes</div>
           <div style={{fontSize:30,fontWeight:700,fontFamily:"'DM Mono',monospace",letterSpacing:-1}}>{clp(monthTotal)}</div>
-          {topCat&&<div style={{marginTop:6,fontSize:12,color:"#64748B",display:"flex",alignItems:"center",gap:5}}>Mayor: <span style={{color:CATS.find(c=>c.id===topCat[0])?.c,display:"inline-flex",alignItems:"center",gap:4,marginLeft:2}}>{React.createElement(CATS.find(c=>c.id===topCat[0])?.I)} {CATS.find(c=>c.id===topCat[0])?.label}</span> — {clp(topCat[1])}</div>}
+          {topCat&&<div style={{marginTop:6,fontSize:12,color:"#64748B",display:"flex",alignItems:"center",gap:5}}>
+            Mayor: {(()=>{const c=cats.find(x=>x.id===topCat[0]);return c?<span style={{color:c.c,display:"inline-flex",alignItems:"center",gap:4,marginLeft:2}}><CatIcon icon={c.icon}/>{c.label}</span>:null;})()}&nbsp;— {clp(topCat[1])}
+          </div>}
         </div>
       </div>
     </div>
@@ -213,20 +289,25 @@ function App(){
     <div style={{maxWidth:480,margin:"0 auto",padding:"16px 16px 0"}}>
       {/* TABS */}
       <div style={{display:"flex",background:"#161821",borderRadius:12,padding:4,marginBottom:16,border:"1px solid #1E2235"}}>
-        <button className="tab" onClick={()=>setTab("mes")} style={{color:tab==="mes"?"#F1F5F9":"#64748B",background:tab==="mes"?"#2D3249":"none"}}><IC.Cal/>Mes</button>
-        <button className="tab" onClick={()=>setTab("cuotas")} style={{color:tab==="cuotas"?"#F1F5F9":"#64748B",background:tab==="cuotas"?"#2D3249":"none"}}><IC.CC/>Cuotas{cuotasExp.length>0&&<span style={{background:"#6366F1",color:"white",borderRadius:999,padding:"1px 5px",fontSize:10}}>{cuotasExp.length}</span>}</button>
-        <button className="tab" onClick={()=>setTab("fijos")} style={{color:tab==="fijos"?"#F1F5F9":"#64748B",background:tab==="fijos"?"#2D3249":"none"}}><IC.Rep/>Fijos{recs.length>0&&<span style={{background:"#10B981",color:"white",borderRadius:999,padding:"1px 5px",fontSize:10}}>{recs.length}</span>}</button>
-        <button className="tab" onClick={()=>setTab("prestamos")} style={{color:tab==="prestamos"?"#F1F5F9":"#64748B",background:tab==="prestamos"?"#2D3249":"none"}}><IC.Hand/>Préstamos{pendingLoans>0&&<span style={{background:"#F59E0B",color:"white",borderRadius:999,padding:"1px 5px",fontSize:10}}>{pendingLoans}</span>}</button>
+        {[["mes","Cal","Mes"],["cuotas","CC","Cuotas"],["fijos","Rep","Fijos"],["prestamos","Hand","Préstamos"],["ahorros","Pig","Ahorros"]].map(([id,icon,label])=>(
+          <button key={id} className="tab" onClick={()=>setTab(id)} style={{color:tab===id?"#F1F5F9":"#64748B",background:tab===id?"#2D3249":"none"}}>
+            {React.createElement(IC[icon])}
+            {label}
+            {id==="cuotas"&&cuotasExp.length>0&&<span style={{background:"#6366F1",color:"white",borderRadius:999,padding:"0 4px",fontSize:9}}>{cuotasExp.length}</span>}
+            {id==="prestamos"&&pendingLoans>0&&<span style={{background:"#F59E0B",color:"white",borderRadius:999,padding:"0 4px",fontSize:9}}>{pendingLoans}</span>}
+            {id==="ahorros"&&savings.length>0&&<span style={{background:"#10B981",color:"white",borderRadius:999,padding:"0 4px",fontSize:9}}>{savings.length}</span>}
+          </button>
+        ))}
       </div>
 
       {/* TAB MES */}
       {tab==="mes"&&<>
         {monthTotal>0&&<div style={{background:"#161821",border:"1px solid #1E2235",borderRadius:16,padding:16,marginBottom:16}}>
           <div style={{fontSize:11,fontWeight:600,color:"#64748B",letterSpacing:1,textTransform:"uppercase",marginBottom:12}}>Por categoría</div>
-          {CATS.filter(c=>byCat[c.id]).sort((a,b)=>(byCat[b.id]||0)-(byCat[a.id]||0)).map(cat=>(
+          {cats.filter(c=>byCat[c.id]).sort((a,b)=>(byCat[b.id]||0)-(byCat[a.id]||0)).map(cat=>(
             <div key={cat.id} style={{marginBottom:10}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",fontSize:13,marginBottom:4}}>
-                <span style={{display:"flex",alignItems:"center",gap:6,color:cat.c}}><cat.I/>{cat.label}</span>
+                <span style={{display:"flex",alignItems:"center",gap:6,color:cat.c}}><CatIcon icon={cat.icon}/>{cat.label}</span>
                 <span style={{fontFamily:"'DM Mono',monospace",color:cat.c,fontSize:12}}>{clp(byCat[cat.id])}</span>
               </div>
               <div style={{background:"#1A1D27",borderRadius:999,height:6}}><div className="bar" style={{width:`${(byCat[cat.id]/monthTotal)*100}%`,background:cat.c}}/></div>
@@ -235,17 +316,17 @@ function App(){
         </div>}
         <div style={{display:"flex",gap:7,overflowX:"auto",paddingBottom:4,marginBottom:14,scrollbarWidth:"none"}}>
           <button className="cat-pill" onClick={()=>setFilterCat("all")} style={{background:filterCat==="all"?"#6366F1":"#1A1D27",color:filterCat==="all"?"white":"#94A3B8",border:`1.5px solid ${filterCat==="all"?"#6366F1":"#2D3249"}`}}>Todos</button>
-          {CATS.filter(c=>byCat[c.id]).map(cat=>(
-            <button key={cat.id} className="cat-pill" onClick={()=>setFilterCat(filterCat===cat.id?"all":cat.id)} style={{background:filterCat===cat.id?cat.c+"22":"#1A1D27",color:filterCat===cat.id?cat.c:"#94A3B8",border:`1.5px solid ${filterCat===cat.id?cat.c:"#2D3249"}`}}><cat.I/>{cat.label}</button>
+          {cats.filter(c=>byCat[c.id]).map(cat=>(
+            <button key={cat.id} className="cat-pill" onClick={()=>setFilterCat(filterCat===cat.id?"all":cat.id)} style={{background:filterCat===cat.id?cat.c+"22":"#1A1D27",color:filterCat===cat.id?cat.c:"#94A3B8",border:`1.5px solid ${filterCat===cat.id?cat.c:"#2D3249"}`}}><CatIcon icon={cat.icon}/>{cat.label}</button>
           ))}
         </div>
         {filtered.length===0
-          ?<div style={{textAlign:"center",padding:"48px 0",color:"#334155"}}><div style={{fontSize:40,marginBottom:12}}>📋</div><div style={{fontSize:15,fontWeight:500,color:"#475569"}}>Sin gastos este mes</div><div style={{fontSize:13,marginTop:4}}>Toca + para agregar uno</div></div>
+          ?<EmptyState icon="Cal" text="Sin gastos este mes" sub="Toca + para agregar uno"/>
           :filtered.sort((a,b)=>{const o=e=>e.recurrente?0:e.cuotas>1?1:2;return o(a)-o(b)||b.id-a.id;}).map(exp=>{
-            const cat=CATS.find(c=>c.id===exp.cat);
+            const cat=cats.find(c=>c.id===exp.cat)||cats[cats.length-1];
             const ci=cidx(exp,month,year)+1;
-            return <div key={exp.id} className="expense-row" style={{borderLeft:exp.recurrente?"3px solid #10B981":exp.cuotas>1?"3px solid #6366F1":"3px solid transparent"}}>
-              <div style={{width:38,height:38,borderRadius:11,background:cat.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:cat.c,flexShrink:0}}><cat.I/></div>
+            return <div key={exp.id} className="exp-row" style={{borderLeft:exp.recurrente?"3px solid #10B981":exp.cuotas>1?"3px solid #6366F1":"3px solid transparent"}}>
+              <div style={{width:38,height:38,borderRadius:11,background:cat.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:cat.c,flexShrink:0}}><CatIcon icon={cat.icon}/></div>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{fontSize:14,fontWeight:500,color:"#E2E8F0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{exp.desc}</div>
                 <div style={{fontSize:11,color:"#475569",marginTop:3,display:"flex",alignItems:"center",gap:5}}>
@@ -258,8 +339,8 @@ function App(){
                 <div style={{fontFamily:"'DM Mono',monospace",fontSize:14,fontWeight:500,color:cat.c}}>{clp(exp.apc)}</div>
                 {exp.cuotas>1&&<div style={{fontSize:10,color:"#475569"}}>de {clp(exp.total)}</div>}
               </div>
-              <button className="icon-btn" onClick={()=>editExp(exp)}><IC.Edit/></button>
-              <button className="icon-btn" onClick={()=>delExp(exp.id)}><IC.Trash/></button>
+              <button className="ibtn" onClick={()=>editExp(exp)}><IC.Edit/></button>
+              <button className="ibtn" onClick={()=>delExp(exp.id)}><IC.Trash/></button>
             </div>;
           })
         }
@@ -268,19 +349,19 @@ function App(){
       {/* TAB CUOTAS */}
       {tab==="cuotas"&&<>
         {cuotasExp.length===0
-          ?<div style={{textAlign:"center",padding:"48px 0",color:"#334155"}}><div style={{fontSize:40,marginBottom:12}}>💳</div><div style={{fontSize:15,fontWeight:500,color:"#475569"}}>Sin gastos en cuotas</div></div>
+          ?<EmptyState icon="CC" text="Sin gastos en cuotas" sub="Agrega un gasto con más de 1 cuota"/>
           :cuotasExp.sort((a,b)=>(a.startYear*12+a.startMonth+a.cuotas)-(b.startYear*12+b.startMonth+b.cuotas)).map(exp=>{
-            const cat=CATS.find(c=>c.id===exp.cat);
+            const cat=cats.find(c=>c.id===exp.cat)||cats[cats.length-1];
             const ci=cidx(exp,month,year);
             const pag=Math.min(Math.max(ci+1,0),exp.cuotas);
             const em=(exp.startMonth+exp.cuotas-1)%12;
             const ey=exp.startYear+Math.floor((exp.startMonth+exp.cuotas-1)/12);
             const done=ci>=exp.cuotas;
-            return <div key={exp.id} className="cuota-card" style={{borderLeftColor:cat.c,opacity:done?.5:1}}>
+            return <div key={exp.id} className="cc" style={{borderLeftColor:cat.c,opacity:done?.5:1}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
                 <div style={{flex:1}}>
                   <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4}}>
-                    <div style={{color:cat.c}}><cat.I/></div>
+                    <div style={{color:cat.c}}><CatIcon icon={cat.icon}/></div>
                     <span style={{fontSize:14,fontWeight:600,color:"#E2E8F0"}}>{exp.desc}</span>
                     {done&&<span className="badge" style={{background:"#10B98122",color:"#10B981"}}>PAGADO</span>}
                   </div>
@@ -289,10 +370,10 @@ function App(){
                 <div style={{textAlign:"right"}}><div style={{fontFamily:"'DM Mono',monospace",fontSize:14,fontWeight:700,color:cat.c}}>{clp(exp.apc)}<span style={{fontSize:11,color:"#64748B",fontWeight:400}}>/mes</span></div><div style={{fontSize:11,color:"#64748B"}}>Total {clp(exp.total)}</div></div>
               </div>
               <div style={{display:"flex",justifyContent:"space-between",fontSize:12,color:"#64748B",marginTop:8,marginBottom:4}}><span>{done?"Completado":`Cuota ${Math.min(ci+1,exp.cuotas)} de ${exp.cuotas}`}</span><span style={{color:cat.c,fontWeight:600}}>{Math.round((pag/exp.cuotas)*100)}%</span></div>
-              <div className="cprog"><div className="cprog-bar" style={{width:`${(pag/exp.cuotas)*100}%`,background:cat.c}}/></div>
+              <div className="cprog"><div className="cpbar" style={{width:`${(pag/exp.cuotas)*100}%`,background:cat.c}}/></div>
               <div style={{display:"flex",gap:8,marginTop:10}}>
-                <button className="icon-btn" style={{fontSize:12,padding:"4px 10px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>editExp(exp)}><IC.Edit/>Editar</button>
-                <button className="icon-btn" style={{fontSize:12,padding:"4px 10px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>delExp(exp.id)}><IC.Trash/>Eliminar</button>
+                <button className="ibtn" style={{fontSize:12,padding:"4px 10px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>editExp(exp)}><IC.Edit/>Editar</button>
+                <button className="ibtn" style={{fontSize:12,padding:"4px 10px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>delExp(exp.id)}><IC.Trash/>Eliminar</button>
               </div>
             </div>;
           })
@@ -302,22 +383,22 @@ function App(){
       {/* TAB FIJOS */}
       {tab==="fijos"&&<>
         {recs.length===0
-          ?<div style={{textAlign:"center",padding:"48px 0",color:"#334155"}}><div style={{fontSize:40,marginBottom:12}}>🔁</div><div style={{fontSize:15,fontWeight:500,color:"#475569"}}>Sin gastos fijos</div><div style={{fontSize:13,marginTop:4}}>Agrega arriendo, Netflix, etc.</div></div>
+          ?<EmptyState icon="Rep" text="Sin gastos fijos" sub="Agrega arriendo, Netflix, etc."/>
           :<>
             <div style={{background:"#10B98111",border:"1px solid #10B98133",borderRadius:14,padding:"12px 16px",marginBottom:16,fontSize:13,color:"#10B981"}}><strong>Total fijos:</strong> {clp(recs.reduce((s,e)=>s+e.apc,0))} / mes</div>
             {recs.map(exp=>{
-              const cat=CATS.find(c=>c.id===exp.cat);
-              return <div key={exp.id} className="rec-card">
+              const cat=cats.find(c=>c.id===exp.cat)||cats[cats.length-1];
+              return <div key={exp.id} style={{background:"#1A1D27",borderRadius:14,padding:"14px 16px",marginBottom:10,borderLeft:"3px solid #10B981"}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                   <div style={{display:"flex",alignItems:"center",gap:10}}>
-                    <div style={{width:38,height:38,borderRadius:11,background:cat.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:cat.c}}><cat.I/></div>
+                    <div style={{width:38,height:38,borderRadius:11,background:cat.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:cat.c}}><CatIcon icon={cat.icon}/></div>
                     <div><div style={{fontSize:14,fontWeight:600,color:"#E2E8F0"}}>{exp.desc}</div><div style={{fontSize:11,color:"#64748B",marginTop:2}}>{cat.label} · desde {MES[exp.startMonth]} {exp.startYear}</div></div>
                   </div>
                   <div style={{textAlign:"right"}}><div style={{fontFamily:"'DM Mono',monospace",fontSize:14,fontWeight:700,color:"#10B981"}}>{clp(exp.apc)}</div><div style={{fontSize:10,color:"#475569"}}>/mes</div></div>
                 </div>
                 <div style={{display:"flex",gap:8,marginTop:10}}>
-                  <button className="icon-btn" style={{fontSize:12,padding:"4px 10px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>editExp(exp)}><IC.Edit/>Editar</button>
-                  <button className="icon-btn" style={{fontSize:12,padding:"4px 10px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>delExp(exp.id)}><IC.Trash/>Eliminar</button>
+                  <button className="ibtn" style={{fontSize:12,padding:"4px 10px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>editExp(exp)}><IC.Edit/>Editar</button>
+                  <button className="ibtn" style={{fontSize:12,padding:"4px 10px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>delExp(exp.id)}><IC.Trash/>Eliminar</button>
                 </div>
               </div>;
             })}
@@ -328,7 +409,7 @@ function App(){
       {/* TAB PRÉSTAMOS */}
       {tab==="prestamos"&&<>
         {loans.length===0
-          ?<div style={{textAlign:"center",padding:"48px 0",color:"#334155"}}><div style={{fontSize:40,marginBottom:12}}>🤝</div><div style={{fontSize:15,fontWeight:500,color:"#475569"}}>Sin préstamos registrados</div><div style={{fontSize:13,marginTop:4}}>Toca + para agregar uno</div></div>
+          ?<EmptyState icon="User" text="Sin préstamos registrados" sub="Toca + para agregar uno"/>
           :<>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:16}}>
               <div style={{background:"#1A1D27",borderRadius:14,padding:"14px 16px",borderLeft:"3px solid #F59E0B"}}>
@@ -342,8 +423,7 @@ function App(){
             </div>
             {loans.sort((a,b)=>(a.cuotasPagadas>=a.cuotas?1:-1)).map(loan=>{
               const paid=loan.cuotasPagadas>=loan.cuotas;
-              const pending=loan.apc*(loan.cuotas-loan.cuotasPagadas);
-              return <div key={loan.id} className="loan-card" style={{borderLeftColor:paid?"#10B981":"#F59E0B",opacity:paid?.65:1}}>
+              return <div key={loan.id} className="cc" style={{borderLeftColor:paid?"#10B981":"#F59E0B",opacity:paid?.65:1}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
                   <div style={{display:"flex",alignItems:"center",gap:10,flex:1}}>
                     <div style={{width:38,height:38,borderRadius:11,background:paid?"#10B98122":"#F59E0B22",display:"flex",alignItems:"center",justifyContent:"center",color:paid?"#10B981":"#F59E0B",flexShrink:0}}><IC.User/></div>
@@ -362,7 +442,7 @@ function App(){
                 </div>
                 {loan.cuotas>1&&<>
                   <div style={{display:"flex",justifyContent:"space-between",fontSize:12,color:"#64748B",marginBottom:4}}>
-                    <span>{paid?"Completado":`${loan.cuotasPagadas}/${loan.cuotas} cuotas · Falta ${clp(pending)}`}</span>
+                    <span>{paid?"Completado":`${loan.cuotasPagadas}/${loan.cuotas} · Falta ${clp(loan.apc*(loan.cuotas-loan.cuotasPagadas))}`}</span>
                     <span style={{color:paid?"#10B981":"#F59E0B",fontWeight:600}}>{Math.round((loan.cuotasPagadas/loan.cuotas)*100)}%</span>
                   </div>
                   <div style={{height:5,background:"#2D3249",borderRadius:999,marginBottom:10,overflow:"hidden"}}>
@@ -370,10 +450,55 @@ function App(){
                   </div>
                 </>}
                 <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
-                  {!paid&&<button className="icon-btn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #10B98144",borderRadius:8,gap:4,color:"#10B981"}} onClick={()=>pagarCuota(loan.id)}><IC.Check/>{loan.cuotas>1?"Registrar cuota":"Marcar pagado"}</button>}
-                  {loan.cuotasPagadas>0&&<button className="icon-btn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>deshacerPago(loan.id)}>↩ Deshacer</button>}
-                  <button className="icon-btn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>editLoan(loan)}><IC.Edit/>Editar</button>
-                  <button className="icon-btn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>delLoan(loan.id)}><IC.Trash/>Eliminar</button>
+                  {!paid&&<button className="ibtn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #10B98144",borderRadius:8,gap:4,color:"#10B981"}} onClick={()=>pagarCuota(loan.id)}><IC.Check/>{loan.cuotas>1?"Registrar cuota":"Marcar pagado"}</button>}
+                  {loan.cuotasPagadas>0&&<button className="ibtn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>deshacerPago(loan.id)}>↩ Deshacer</button>}
+                  <button className="ibtn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>editLoan(loan)}><IC.Edit/>Editar</button>
+                  <button className="ibtn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>delLoan(loan.id)}><IC.Trash/>Eliminar</button>
+                </div>
+              </div>;
+            })}
+          </>
+        }
+      </>}
+
+      {/* TAB AHORROS */}
+      {tab==="ahorros"&&<>
+        {savings.length===0
+          ?<EmptyState icon="Pig" text="Sin ahorros registrados" sub="Toca + para crear una meta"/>
+          :<>
+            <div style={{background:"#10B98111",border:"1px solid #10B98133",borderRadius:14,padding:"12px 16px",marginBottom:16,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <div style={{fontSize:13,color:"#10B981"}}><strong>Total ahorrado:</strong> {clp(totalAhorros)}</div>
+              {savings.some(s=>s.meta>0)&&<div style={{fontSize:12,color:"#64748B"}}>Meta total: {clp(savings.filter(s=>s.meta>0).reduce((s,a)=>s+a.meta,0))}</div>}
+            </div>
+            {savings.map(ahorro=>{
+              const pct=ahorro.meta>0?Math.min(100,Math.round((ahorro.aportado/ahorro.meta)*100)):null;
+              const done=ahorro.meta>0&&ahorro.aportado>=ahorro.meta;
+              return <div key={ahorro.id} style={{background:"#1A1D27",borderRadius:14,padding:"14px 16px",marginBottom:10,borderLeft:`3px solid ${done?"#F59E0B":"#10B981"}`}}>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
+                  <div>
+                    <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:3}}>
+                      <span style={{fontSize:14,fontWeight:600,color:"#E2E8F0"}}>{ahorro.nombre}</span>
+                      {done&&<span className="badge" style={{background:"#F59E0B22",color:"#F59E0B"}}>META</span>}
+                    </div>
+                    <div style={{fontSize:11,color:"#64748B"}}>{ahorro.date}{ahorro.nota&&<span style={{marginLeft:6}}>· {ahorro.nota}</span>}</div>
+                  </div>
+                  <div style={{textAlign:"right"}}>
+                    <div style={{fontFamily:"'DM Mono',monospace",fontSize:15,fontWeight:700,color:done?"#F59E0B":"#10B981"}}>{clp(ahorro.aportado)}</div>
+                    {ahorro.meta>0&&<div style={{fontSize:11,color:"#64748B"}}>meta {clp(ahorro.meta)}</div>}
+                  </div>
+                </div>
+                {ahorro.meta>0&&<>
+                  <div style={{display:"flex",justifyContent:"space-between",fontSize:12,color:"#64748B",marginBottom:4}}>
+                    <span>{done?"Meta alcanzada":`Faltan ${clp(ahorro.meta-ahorro.aportado)}`}</span>
+                    <span style={{color:done?"#F59E0B":"#10B981",fontWeight:600}}>{pct}%</span>
+                  </div>
+                  <div style={{height:5,background:"#2D3249",borderRadius:999,marginBottom:10,overflow:"hidden"}}>
+                    <div style={{height:"100%",borderRadius:999,background:done?"#F59E0B":"#10B981",width:`${pct}%`,transition:"width .4s"}}/>
+                  </div>
+                </>}
+                <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
+                  <button className="ibtn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #10B98144",borderRadius:8,gap:4,color:"#10B981"}} onClick={()=>editSaving(ahorro)}><IC.TrendUp/>Actualizar</button>
+                  <button className="ibtn" style={{fontSize:12,padding:"5px 11px",border:"1px solid #2D3249",borderRadius:8,gap:4}} onClick={()=>delSaving(ahorro.id)}><IC.Trash/>Eliminar</button>
                 </div>
               </div>;
             })}
@@ -383,110 +508,187 @@ function App(){
     </div>
 
     {/* FAB */}
-    <button className="add-btn" onClick={()=>{if(tab==="prestamos"){setShowLoan(true);setEditLoanId(null);setLf({persona:"",amount:"",cuotas:"1",byCuota:false,nota:""});}else{setShowExp(true);setEditExpId(null);setEf({desc:"",amount:"",cat:"servicios",cuotas:"1",rec:false,byCuota:false});}}}>
-      <IC.Plus/>
-    </button>
+    <button className="fab" onClick={()=>{
+      if(tab==="prestamos"){setShowLoan(true);setEditLoanId(null);setLf({persona:"",amount:"",cuotas:"1",byCuota:false,nota:""});}
+      else if(tab==="ahorros"){setShowSaving(true);setEditSavingId(null);setSf({nombre:"",meta:"",aportado:"",nota:""});}
+      else{setShowExp(true);setEditExpId(null);setEf({desc:"",amount:"",cat:"alimentacion",cuotas:"1",rec:false,byCuota:false});}
+    }}><IC.Plus/></button>
 
-    {/* MODAL CONFIGURACIÓN */}
-    {showCfg&&<div className="modal-bg" onClick={e=>{if(e.target===e.currentTarget)setShowCfg(false);}}>
+    {/* MODAL CONFIG */}
+    {showCfg&&<div className="mbg" onClick={e=>{if(e.target===e.currentTarget)setShowCfg(false);}}>
       <div className="modal">
-        <div style={{fontSize:17,fontWeight:700,marginBottom:6,color:"#F1F5F9",display:"flex",alignItems:"center",gap:8}}><IC.Gear/>Respaldo de datos</div>
-        <div style={{fontSize:13,color:"#64748B",marginBottom:20}}>Exporta tus gastos para guardarlos. Si se borran los datos, impórtalos de nuevo.</div>
-        <button className="bkbtn" onClick={exportar}><IC.Down/><div><div style={{color:"#F1F5F9",fontWeight:600}}>Exportar respaldo</div><div style={{fontSize:11,marginTop:1}}>Descarga un archivo .json con tus datos</div></div></button>
-        <button className="bkbtn" onClick={()=>fileRef.current.click()}><IC.Up/><div><div style={{color:"#F1F5F9",fontWeight:600}}>Importar respaldo</div><div style={{fontSize:11,marginTop:1}}>Restaura datos desde un archivo .json</div></div></button>
+        <div style={{fontSize:17,fontWeight:700,marginBottom:6,color:"#F1F5F9",display:"flex",alignItems:"center",gap:8}}><IC.Gear/>Configuración</div>
+        <div style={{fontSize:13,color:"#64748B",marginBottom:16}}>Respaldo y categorías</div>
+        <button className="bkbtn" onClick={()=>{setShowCfg(false);setShowCatMgr(true);}} style={{borderColor:"#6366F133"}}>
+          <IC.Tag/><div><div style={{color:"#F1F5F9",fontWeight:600}}>Gestionar categorías</div><div style={{fontSize:11,marginTop:1}}>Agrega o elimina categorías</div></div>
+        </button>
+        <button className="bkbtn" onClick={exportar}><IC.Down/><div><div style={{color:"#F1F5F9",fontWeight:600}}>Exportar respaldo</div><div style={{fontSize:11,marginTop:1}}>Descarga un .json con tus datos</div></div></button>
+        <button className="bkbtn" onClick={()=>fileRef.current.click()}><IC.Up/><div><div style={{color:"#F1F5F9",fontWeight:600}}>Importar respaldo</div><div style={{fontSize:11,marginTop:1}}>Restaura desde un .json</div></div></button>
         <input ref={fileRef} type="file" accept=".json" style={{display:"none"}} onChange={importar}/>
-        <div style={{margin:"14px 0",padding:"12px 14px",background:"#1A1D27",borderRadius:12,fontSize:12,color:"#64748B",lineHeight:1.6}}>💡 Exporta cada vez que agregues gastos y guarda el archivo en iCloud o Archivos.</div>
-        <button className="cancel-btn" onClick={()=>setShowCfg(false)}>Cerrar</button>
+        <button className="cbtn" style={{marginTop:8}} onClick={()=>setShowCfg(false)}>Cerrar</button>
+      </div>
+    </div>}
+
+    {/* MODAL CATEGORÍAS */}
+    {showCatMgr&&<div className="mbg" onClick={e=>{if(e.target===e.currentTarget)setShowCatMgr(false);}}>
+      <div className="modal">
+        <div style={{fontSize:17,fontWeight:700,marginBottom:16,color:"#F1F5F9",display:"flex",alignItems:"center",gap:8}}><IC.Tag/>Categorías</div>
+        {cats.map(cat=>(
+          <div key={cat.id} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",background:"#1A1D27",borderRadius:12,marginBottom:8}}>
+            <div style={{width:34,height:34,borderRadius:10,background:cat.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:cat.c,flexShrink:0}}><CatIcon icon={cat.icon}/></div>
+            <div style={{flex:1,fontSize:14,fontWeight:500,color:"#E2E8F0"}}>{cat.label}</div>
+            {cat.custom&&<button className="ibtn" onClick={()=>delCat(cat.id)}><IC.Trash/></button>}
+            {!cat.custom&&<span style={{fontSize:10,color:"#334155",padding:"2px 8px",background:"#1E2235",borderRadius:999}}>predeterminada</span>}
+          </div>
+        ))}
+        <button style={{width:"100%",padding:"12px",border:"1.5px dashed #2D3249",borderRadius:12,background:"none",color:"#6366F1",cursor:"pointer",fontFamily:"inherit",fontSize:14,fontWeight:500,marginTop:4,display:"flex",alignItems:"center",justifyContent:"center",gap:6}} onClick={()=>{setShowCatMgr(false);setShowNewCat(true);}}>
+          <IC.Plus/>Nueva categoría
+        </button>
+        <button className="cbtn" style={{marginTop:10}} onClick={()=>setShowCatMgr(false)}>Listo</button>
+      </div>
+    </div>}
+
+    {/* MODAL NUEVA CATEGORÍA */}
+    {showNewCat&&<div className="mbg" onClick={e=>{if(e.target===e.currentTarget){setShowNewCat(false);setShowCatMgr(true);}}}>
+      <div className="modal">
+        <div style={{fontSize:17,fontWeight:700,marginBottom:20,color:"#F1F5F9"}}>Nueva categoría</div>
+        <div style={{marginBottom:14}}>
+          <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Nombre</label>
+          <input className="inp" placeholder="Ej: Educación, Viajes…" value={ncf.label} onChange={e=>setNcf(f=>({...f,label:e.target.value}))}/>
+        </div>
+        <div style={{marginBottom:14}}>
+          <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:8,fontWeight:500}}>Color</label>
+          <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+            {CAT_COLORS.map(c=><div key={c} className={`color-swatch${ncf.c===c?" sel":""}`} style={{background:c}} onClick={()=>setNcf(f=>({...f,c}))}/>)}
+          </div>
+        </div>
+        <div style={{marginBottom:20}}>
+          <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:8,fontWeight:500}}>Ícono</label>
+          <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+            {CAT_ICONS.map(icon=>(
+              <button key={icon} onClick={()=>setNcf(f=>({...f,icon}))} style={{width:40,height:40,borderRadius:10,border:`1.5px solid ${ncf.icon===icon?ncf.c:"#2D3249"}`,background:ncf.icon===icon?ncf.c+"22":"#1A1D27",color:ncf.icon===icon?ncf.c:"#64748B",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                {React.createElement(IC[icon])}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div style={{marginBottom:16,padding:"12px 14px",background:"#1A1D27",borderRadius:12,display:"flex",alignItems:"center",gap:10}}>
+          <div style={{width:38,height:38,borderRadius:11,background:ncf.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:ncf.c}}>{React.createElement(IC[ncf.icon])}</div>
+          <span style={{fontSize:14,fontWeight:500,color:"#E2E8F0"}}>{ncf.label||"Vista previa"}</span>
+        </div>
+        <div style={{display:"flex",gap:10}}>
+          <button className="cbtn" onClick={()=>{setShowNewCat(false);setShowCatMgr(true);}}>Cancelar</button>
+          <button className="pbtn" onClick={saveNewCat}>Crear</button>
+        </div>
       </div>
     </div>}
 
     {/* MODAL GASTO */}
-    {showExp&&<div className="modal-bg" onClick={e=>{if(e.target===e.currentTarget){setShowExp(false);setEditExpId(null);}}}>
+    {showExp&&<div className="mbg" onClick={e=>{if(e.target===e.currentTarget){setShowExp(false);setEditExpId(null);}}}>
       <div className="modal">
         <div style={{fontSize:17,fontWeight:700,marginBottom:20,color:"#F1F5F9"}}>{editExpId?"Editar gasto":"Nuevo gasto"}</div>
         <div style={{marginBottom:18}}>
-          <div className={`toggle-row${ef.rec?" active":""}`} onClick={()=>setEf(f=>({...f,rec:!f.rec,cuotas:"1"}))}>
+          <div className={`trow${ef.rec?" on":""}`} onClick={()=>setEf(f=>({...f,rec:!f.rec,cuotas:"1"}))}>
             <div><div style={{fontSize:14,fontWeight:600,color:ef.rec?"#10B981":"#E2E8F0",display:"flex",alignItems:"center",gap:6}}><IC.Rep/>Gasto fijo mensual</div><div style={{fontSize:12,color:"#64748B",marginTop:2}}>Arriendo, Netflix, suscripciones…</div></div>
             <div className={`ttrack${ef.rec?" on":""}`}><div className={`tthumb${ef.rec?" on":""}`}/></div>
           </div>
         </div>
         <div style={{marginBottom:14}}>
           <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Descripción</label>
-          <input className="input" placeholder="Ej: Arriendo, TV Samsung…" value={ef.desc} onChange={e=>setEf(f=>({...f,desc:e.target.value}))}/>
+          <input className="inp" placeholder="Ej: Arriendo, TV Samsung…" value={ef.desc} onChange={e=>setEf(f=>({...f,desc:e.target.value}))}/>
         </div>
         <div style={{marginBottom:14}}>
-          {!ef.rec&&<div className="mode-toggle">
-            <button className="mode-btn" onClick={()=>setEf(f=>({...f,byCuota:false,amount:""}))} style={{background:!ef.byCuota?"#6366F1":"none",color:!ef.byCuota?"white":"#64748B"}}>Monto total</button>
-            <button className="mode-btn" onClick={()=>setEf(f=>({...f,byCuota:true,amount:""}))} style={{background:ef.byCuota?"#6366F1":"none",color:ef.byCuota?"white":"#64748B"}}>Por cuota</button>
+          {!ef.rec&&<div className="mtoggle">
+            <button className="mbtn" onClick={()=>setEf(f=>({...f,byCuota:false,amount:""}))} style={{background:!ef.byCuota?"#6366F1":"none",color:!ef.byCuota?"white":"#64748B"}}>Monto total</button>
+            <button className="mbtn" onClick={()=>setEf(f=>({...f,byCuota:true,amount:""}))} style={{background:ef.byCuota?"#6366F1":"none",color:ef.byCuota?"white":"#64748B"}}>Por cuota</button>
           </div>}
           <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>
             {ef.rec?"Monto mensual":ef.byCuota?"Monto por cuota":"Monto total"} (CLP)
             {!ef.rec&&!ef.byCuota&&parseInt(ef.cuotas)>1&&<span style={{color:"#6366F1",marginLeft:8}}>→ {clp(Math.round(amt(ef.amount)/parseInt(ef.cuotas)))}/mes</span>}
             {!ef.rec&&ef.byCuota&&parseInt(ef.cuotas)>1&&<span style={{color:"#6366F1",marginLeft:8}}>Total: {clp(Math.round(amt(ef.amount)*parseInt(ef.cuotas)))}</span>}
           </label>
-          <input className="input" placeholder="0" type="number" value={ef.amount} onChange={e=>setEf(f=>({...f,amount:e.target.value}))}/>
+          <input className="inp" placeholder="0" type="number" value={ef.amount} onChange={e=>setEf(f=>({...f,amount:e.target.value}))}/>
         </div>
         {!ef.rec&&<div style={{marginBottom:14}}>
           <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Cuotas {parseInt(ef.cuotas)===1?"(pago único)":`(${ef.cuotas} meses)`}</label>
-          <div className="stepper">
-            <button className="stepper-btn" onClick={()=>setEf(f=>({...f,cuotas:String(Math.max(1,parseInt(f.cuotas)-1))}))}>−</button>
-            <span className="stepper-val">{ef.cuotas==="1"?"1× (único)":`${ef.cuotas}×`}</span>
-            <button className="stepper-btn" onClick={()=>setEf(f=>({...f,cuotas:String(Math.min(48,parseInt(f.cuotas)+1))}))}>+</button>
-          </div>
+          <CuotasInput value={ef.cuotas} onChange={v=>setEf(f=>({...f,cuotas:v}))}/>
         </div>}
-        {ef.rec&&<div style={{fontSize:12,color:"#10B981",background:"#10B98111",borderRadius:10,padding:"10px 14px",marginBottom:14}}>✅ Aparecerá desde <strong>{MES[month]} {year}</strong> en adelante.</div>}
+        {ef.rec&&<div style={{fontSize:12,color:"#10B981",background:"#10B98111",borderRadius:10,padding:"10px 14px",marginBottom:14,display:"flex",alignItems:"center",gap:8}}><IC.Check/><span>Aparecerá desde <strong>{MES[month]} {year}</strong> en adelante.</span></div>}
         <div style={{marginBottom:20}}>
           <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:8,fontWeight:500}}>Categoría</label>
           <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
-            {CATS.map(cat=>(
+            {cats.map(cat=>(
               <button key={cat.id} onClick={()=>setEf(f=>({...f,cat:cat.id}))} style={{padding:"7px 11px",borderRadius:10,border:`1.5px solid ${ef.cat===cat.id?cat.c:"#2D3249"}`,background:ef.cat===cat.id?cat.c+"22":"#1A1D27",color:ef.cat===cat.id?cat.c:"#94A3B8",fontSize:12,cursor:"pointer",fontFamily:"inherit",fontWeight:ef.cat===cat.id?600:400,display:"flex",alignItems:"center",gap:5}}>
-                <cat.I/>{cat.label}
+                <CatIcon icon={cat.icon}/>{cat.label}
               </button>
             ))}
           </div>
         </div>
         <div style={{display:"flex",gap:10}}>
-          <button className="cancel-btn" onClick={()=>{setShowExp(false);setEditExpId(null);}}>Cancelar</button>
-          <button className="primary-btn" onClick={saveExp}>{editExpId?"Guardar":"Agregar"}</button>
+          <button className="cbtn" onClick={()=>{setShowExp(false);setEditExpId(null);}}>Cancelar</button>
+          <button className="pbtn" onClick={saveExp}>{editExpId?"Guardar":"Agregar"}</button>
         </div>
       </div>
     </div>}
 
     {/* MODAL PRÉSTAMO */}
-    {showLoan&&<div className="modal-bg" onClick={e=>{if(e.target===e.currentTarget){setShowLoan(false);setEditLoanId(null);}}}>
+    {showLoan&&<div className="mbg" onClick={e=>{if(e.target===e.currentTarget){setShowLoan(false);setEditLoanId(null);}}}>
       <div className="modal">
         <div style={{fontSize:17,fontWeight:700,marginBottom:20,color:"#F1F5F9",display:"flex",alignItems:"center",gap:8}}><IC.User/>{editLoanId?"Editar préstamo":"Nuevo préstamo"}</div>
         <div style={{marginBottom:14}}>
           <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>¿A quién le prestaste?</label>
-          <input className="input" placeholder="Nombre de la persona" value={lf.persona} onChange={e=>setLf(f=>({...f,persona:e.target.value}))}/>
+          <input className="inp" placeholder="Nombre de la persona" value={lf.persona} onChange={e=>setLf(f=>({...f,persona:e.target.value}))}/>
         </div>
         <div style={{marginBottom:14}}>
-          <div className="mode-toggle">
-            <button className="mode-btn" onClick={()=>setLf(f=>({...f,byCuota:false,amount:""}))} style={{background:!lf.byCuota?"#F59E0B":"none",color:!lf.byCuota?"white":"#64748B"}}>Monto total</button>
-            <button className="mode-btn" onClick={()=>setLf(f=>({...f,byCuota:true,amount:""}))} style={{background:lf.byCuota?"#F59E0B":"none",color:lf.byCuota?"white":"#64748B"}}>Por cuota</button>
+          <div className="mtoggle">
+            <button className="mbtn" onClick={()=>setLf(f=>({...f,byCuota:false,amount:""}))} style={{background:!lf.byCuota?"#F59E0B":"none",color:!lf.byCuota?"white":"#64748B"}}>Monto total</button>
+            <button className="mbtn" onClick={()=>setLf(f=>({...f,byCuota:true,amount:""}))} style={{background:lf.byCuota?"#F59E0B":"none",color:lf.byCuota?"white":"#64748B"}}>Por cuota</button>
           </div>
           <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>
             {lf.byCuota?"Monto por cuota":"Monto total"} (CLP)
             {!lf.byCuota&&parseInt(lf.cuotas)>1&&<span style={{color:"#F59E0B",marginLeft:8}}>→ {clp(Math.round(amt(lf.amount)/parseInt(lf.cuotas)))}/cuota</span>}
             {lf.byCuota&&parseInt(lf.cuotas)>1&&<span style={{color:"#F59E0B",marginLeft:8}}>Total: {clp(Math.round(amt(lf.amount)*parseInt(lf.cuotas)))}</span>}
           </label>
-          <input className="input" placeholder="0" type="number" value={lf.amount} onChange={e=>setLf(f=>({...f,amount:e.target.value}))}/>
+          <input className="inp" placeholder="0" type="number" value={lf.amount} onChange={e=>setLf(f=>({...f,amount:e.target.value}))}/>
         </div>
         <div style={{marginBottom:14}}>
           <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Cuotas {parseInt(lf.cuotas)===1?"(pago único)":`(${lf.cuotas} pagos)`}</label>
-          <div className="stepper">
-            <button className="stepper-btn" onClick={()=>setLf(f=>({...f,cuotas:String(Math.max(1,parseInt(f.cuotas)-1))}))}>−</button>
-            <span className="stepper-val">{lf.cuotas==="1"?"1× (único)":`${lf.cuotas}×`}</span>
-            <button className="stepper-btn" onClick={()=>setLf(f=>({...f,cuotas:String(Math.min(48,parseInt(f.cuotas)+1))}))}>+</button>
-          </div>
+          <CuotasInput value={lf.cuotas} onChange={v=>setLf(f=>({...f,cuotas:v}))}/>
         </div>
         <div style={{marginBottom:20}}>
           <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Nota (opcional)</label>
-          <input className="input" placeholder="Ej: Para la micro, emergencia…" value={lf.nota} onChange={e=>setLf(f=>({...f,nota:e.target.value}))}/>
+          <input className="inp" placeholder="Ej: Para la micro…" value={lf.nota} onChange={e=>setLf(f=>({...f,nota:e.target.value}))}/>
         </div>
         <div style={{display:"flex",gap:10}}>
-          <button className="cancel-btn" onClick={()=>{setShowLoan(false);setEditLoanId(null);}}>Cancelar</button>
-          <button className="loan-btn" onClick={saveLoan}>{editLoanId?"Guardar":"Agregar"}</button>
+          <button className="cbtn" onClick={()=>{setShowLoan(false);setEditLoanId(null);}}>Cancelar</button>
+          <button className="lbtn" onClick={saveLoan}>{editLoanId?"Guardar":"Agregar"}</button>
+        </div>
+      </div>
+    </div>}
+
+    {/* MODAL AHORRO */}
+    {showSaving&&<div className="mbg" onClick={e=>{if(e.target===e.currentTarget){setShowSaving(false);setEditSavingId(null);}}}>
+      <div className="modal">
+        <div style={{fontSize:17,fontWeight:700,marginBottom:20,color:"#F1F5F9",display:"flex",alignItems:"center",gap:8}}><IC.Pig/>{editSavingId?"Actualizar ahorro":"Nuevo ahorro"}</div>
+        <div style={{marginBottom:14}}>
+          <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Nombre</label>
+          <input className="inp" placeholder="Ej: Vacaciones, Auto, Fondo emergencia…" value={sf.nombre} onChange={e=>setSf(f=>({...f,nombre:e.target.value}))}/>
+        </div>
+        <div style={{marginBottom:14}}>
+          <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Monto ahorrado (CLP)</label>
+          <input className="inp" placeholder="0" type="number" value={sf.aportado} onChange={e=>setSf(f=>({...f,aportado:e.target.value}))}/>
+        </div>
+        <div style={{marginBottom:14}}>
+          <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Meta (opcional)</label>
+          <input className="inp" placeholder="0 — deja vacío si no tienes meta" type="number" value={sf.meta} onChange={e=>setSf(f=>({...f,meta:e.target.value}))}/>
+        </div>
+        <div style={{marginBottom:20}}>
+          <label style={{fontSize:12,color:"#64748B",display:"block",marginBottom:6,fontWeight:500}}>Nota (opcional)</label>
+          <input className="inp" placeholder="Ej: Para diciembre…" value={sf.nota} onChange={e=>setSf(f=>({...f,nota:e.target.value}))}/>
+        </div>
+        <div style={{display:"flex",gap:10}}>
+          <button className="cbtn" onClick={()=>{setShowSaving(false);setEditSavingId(null);}}>Cancelar</button>
+          <button className="sbtn" onClick={saveSaving}>{editSavingId?"Guardar":"Crear"}</button>
         </div>
       </div>
     </div>}
