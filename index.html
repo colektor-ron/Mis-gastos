@@ -127,6 +127,7 @@ function App(){
   const [expenses,setExpenses]=useState(()=>load("mg-exp"));
   const [loans,setLoans]=useState(()=>load("mg-loans"));
   const [savings,setSavings]=useState(()=>load("mg-savings"));
+  const [pagos,setPagos]=useState(()=>load("mg-pagos"));
   const [filterCat,setFilterCat]=useState("all");
   const [showExp,setShowExp]=useState(false);
   const [showLoan,setShowLoan]=useState(false);
@@ -148,6 +149,7 @@ function App(){
   useEffect(()=>{localStorage.setItem("mg-exp",JSON.stringify(expenses));},[expenses]);
   useEffect(()=>{localStorage.setItem("mg-loans",JSON.stringify(loans));},[loans]);
   useEffect(()=>{localStorage.setItem("mg-savings",JSON.stringify(savings));},[savings]);
+  useEffect(()=>{localStorage.setItem("mg-pagos",JSON.stringify(pagos));},[pagos]);
 
   const showMsg=(msg,color="#10B981")=>{setToast({msg,color});setTimeout(()=>setToast(null),2500);};
 
@@ -219,8 +221,12 @@ function App(){
     setExpenses(p=>p.map(e=>e.cat===id?{...e,cat:"otros"}:e));
   }
 
+  function pagoKey(id,m,y){return `${id}-${m}-${y}`;}
+  function isPagado(id,m,y){return pagos.includes(pagoKey(id,m,y));}
+  function togglePago(id,m,y){const k=pagoKey(id,m,y);setPagos(p=>p.includes(k)?p.filter(x=>x!==k):[...p,k]);}
+
   function exportar(){
-    const blob=new Blob([JSON.stringify({v:2,date:new Date().toISOString(),expenses,loans,savings,cats},null,2)],{type:"application/json"});
+    const blob=new Blob([JSON.stringify({v:2,date:new Date().toISOString(),expenses,loans,savings,cats,pagos},null,2)],{type:"application/json"});
     const url=URL.createObjectURL(blob);
     const a=document.createElement("a");
     a.href=url;a.download=`mis-gastos-${new Date().toLocaleDateString("es-CL").replace(/\//g,"-")}.json`;a.click();
@@ -230,7 +236,7 @@ function App(){
     const f=e.target.files[0];if(!f)return;
     const r=new FileReader();
     r.onload=ev=>{try{const d=JSON.parse(ev.target.result);
-      if(d.expenses){setExpenses(d.expenses);if(d.loans)setLoans(d.loans);if(d.savings)setSavings(d.savings);if(d.cats)setCats(d.cats);showMsg("Datos restaurados");setShowCfg(false);}
+      if(d.expenses){setExpenses(d.expenses);if(d.loans)setLoans(d.loans);if(d.savings)setSavings(d.savings);if(d.cats)setCats(d.cats);if(d.pagos)setPagos(d.pagos);showMsg("Datos restaurados");setShowCfg(false);}
       else showMsg("Archivo inválido","#EF4444");
     }catch{showMsg("Error al leer","#EF4444");}};
     r.readAsText(f);e.target.value="";
@@ -322,23 +328,34 @@ function App(){
         </div>
         {filtered.length===0
           ?<EmptyState icon="Cal" text="Sin gastos este mes" sub="Toca + para agregar uno"/>
-          :filtered.sort((a,b)=>{const o=e=>e.recurrente?0:e.cuotas>1?1:2;return o(a)-o(b)||b.id-a.id;}).map(exp=>{
+          :filtered.sort((a,b)=>{
+              const pa=isPagado(a.id,month,year)?1:0;
+              const pb=isPagado(b.id,month,year)?1:0;
+              if(pa!==pb)return pa-pb;
+              const o=e=>e.recurrente?0:e.cuotas>1?1:2;
+              return o(a)-o(b)||b.id-a.id;
+            }).map(exp=>{
             const cat=cats.find(c=>c.id===exp.cat)||cats[cats.length-1];
             const ci=cidx(exp,month,year)+1;
-            return <div key={exp.id} className="exp-row" style={{borderLeft:exp.recurrente?"3px solid #10B981":exp.cuotas>1?"3px solid #6366F1":"3px solid transparent"}}>
-              <div style={{width:38,height:38,borderRadius:11,background:cat.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:cat.c,flexShrink:0}}><CatIcon icon={cat.icon}/></div>
+            const pagado=isPagado(exp.id,month,year);
+            return <div key={exp.id} className="exp-row" style={{borderLeft:pagado?"3px solid #10B981":exp.recurrente?"3px solid #10B98166":exp.cuotas>1?"3px solid #6366F1":"3px solid transparent",opacity:pagado?.5:1}}>
+              <div style={{width:38,height:38,borderRadius:11,background:cat.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:pagado?"#10B981":cat.c,flexShrink:0}}><CatIcon icon={cat.icon}/></div>
               <div style={{flex:1,minWidth:0}}>
-                <div style={{fontSize:14,fontWeight:500,color:"#E2E8F0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{exp.desc}</div>
+                <div style={{fontSize:14,fontWeight:500,color:pagado?"#475569":"#E2E8F0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",textDecoration:pagado?"line-through":"none"}}>{exp.desc}</div>
                 <div style={{fontSize:11,color:"#475569",marginTop:3,display:"flex",alignItems:"center",gap:5}}>
                   <span>{cat.label}</span>
                   {exp.recurrente&&<span className="badge" style={{background:"#10B98122",color:"#10B981"}}>Fijo</span>}
                   {!exp.recurrente&&exp.cuotas>1&&<span className="badge" style={{background:"#6366F122",color:"#818CF8"}}>{ci}/{exp.cuotas}</span>}
+                  {pagado&&<span className="badge" style={{background:"#10B98122",color:"#10B981"}}>Pagado</span>}
                 </div>
               </div>
               <div style={{textAlign:"right",flexShrink:0}}>
-                <div style={{fontFamily:"'DM Mono',monospace",fontSize:14,fontWeight:500,color:cat.c}}>{clp(exp.apc)}</div>
+                <div style={{fontFamily:"'DM Mono',monospace",fontSize:14,fontWeight:500,color:pagado?"#475569":cat.c}}>{clp(exp.apc)}</div>
                 {exp.cuotas>1&&<div style={{fontSize:10,color:"#475569"}}>de {clp(exp.total)}</div>}
               </div>
+              <button onClick={()=>togglePago(exp.id,month,year)} style={{background:"none",border:`1.5px solid ${pagado?"#10B981":"#2D3249"}`,borderRadius:"50%",width:30,height:30,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,color:pagado?"#10B981":"#334155",transition:"all .2s"}}>
+                {pagado?<IC.Check/>:<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
+              </button>
               <button className="ibtn" onClick={()=>editExp(exp)}><IC.Edit/></button>
               <button className="ibtn" onClick={()=>delExp(exp.id)}><IC.Trash/></button>
             </div>;
