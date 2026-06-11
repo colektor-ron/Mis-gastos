@@ -338,23 +338,22 @@ function App(){
             const cat=cats.find(c=>c.id===exp.cat)||cats[cats.length-1];
             const ci=cidx(exp,month,year)+1;
             const pagado=isPagado(exp.id,month,year);
-            return <div key={exp.id} className="exp-row" style={{borderLeft:pagado?"3px solid #10B981":exp.recurrente?"3px solid #10B98166":exp.cuotas>1?"3px solid #6366F1":"3px solid transparent",opacity:pagado?.5:1}}>
-              <div style={{width:38,height:38,borderRadius:11,background:cat.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:pagado?"#10B981":cat.c,flexShrink:0}}><CatIcon icon={cat.icon}/></div>
+            return <div key={exp.id} className="exp-row" style={{borderLeft:exp.recurrente?"3px solid #10B98166":exp.cuotas>1?"3px solid #6366F1":"3px solid transparent"}}>
+              <div style={{width:38,height:38,borderRadius:11,background:cat.c+"22",display:"flex",alignItems:"center",justifyContent:"center",color:cat.c,flexShrink:0}}><CatIcon icon={cat.icon}/></div>
               <div style={{flex:1,minWidth:0}}>
-                <div style={{fontSize:14,fontWeight:500,color:pagado?"#475569":"#E2E8F0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",textDecoration:pagado?"line-through":"none"}}>{exp.desc}</div>
+                <div style={{fontSize:14,fontWeight:500,color:"#E2E8F0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{exp.desc}</div>
                 <div style={{fontSize:11,color:"#475569",marginTop:3,display:"flex",alignItems:"center",gap:5}}>
                   <span>{cat.label}</span>
                   {exp.recurrente&&<span className="badge" style={{background:"#10B98122",color:"#10B981"}}>Fijo</span>}
                   {!exp.recurrente&&exp.cuotas>1&&<span className="badge" style={{background:"#6366F122",color:"#818CF8"}}>{ci}/{exp.cuotas}</span>}
-                  {pagado&&<span className="badge" style={{background:"#10B98122",color:"#10B981"}}>Pagado</span>}
                 </div>
               </div>
               <div style={{textAlign:"right",flexShrink:0}}>
-                <div style={{fontFamily:"'DM Mono',monospace",fontSize:14,fontWeight:500,color:pagado?"#475569":cat.c}}>{clp(exp.apc)}</div>
+                <div style={{fontFamily:"'DM Mono',monospace",fontSize:14,fontWeight:500,color:cat.c}}>{clp(exp.apc)}</div>
                 {exp.cuotas>1&&<div style={{fontSize:10,color:"#475569"}}>de {clp(exp.total)}</div>}
               </div>
-              <button onClick={()=>togglePago(exp.id,month,year)} style={{background:"none",border:`1.5px solid ${pagado?"#10B981":"#2D3249"}`,borderRadius:"50%",width:30,height:30,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,color:pagado?"#10B981":"#334155",transition:"all .2s"}}>
-                {pagado?<IC.Check/>:<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
+              <button onClick={()=>togglePago(exp.id,month,year)} style={{background:pagado?"#10B981":"none",border:`1.5px solid ${pagado?"#10B981":"#2D3249"}`,borderRadius:"50%",width:30,height:30,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,color:pagado?"white":"#334155",transition:"all .2s"}}>
+                <IC.Check/>
               </button>
               <button className="ibtn" onClick={()=>editExp(exp)}><IC.Edit/></button>
               <button className="ibtn" onClick={()=>delExp(exp.id)}><IC.Trash/></button>
